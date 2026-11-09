@@ -1,0 +1,54 @@
+<section class="section">
+  <div class="wrap">
+    <div class="section-head">
+      <div>{%- if section.settings.kicker != blank -%}<span class="script">{{ section.settings.kicker }}</span>{%- endif -%}<h2>{{ section.settings.title }}</h2></div>
+      <a class="link-arrow" href="{{ routes.collections_url }}">Tout le shop →</a>
+    </div>
+    <div class="cats cats-5">
+      {%- if section.blocks.size > 0 -%}
+        {%- for block in section.blocks -%}
+          {%- assign c = block.settings.collection -%}
+          {%- if c != blank -%}
+            {%- assign img = block.settings.image | default: c.featured_image | default: c.products.first.featured_image -%}
+            <a class="cat-tile" href="{{ c.url }}" {{ block.shopify_attributes }}>
+              {%- if img -%}{{ img | image_url: width: 600 | image_tag: loading: 'lazy', alt: '' }}{%- endif -%}
+              <div class="label"><strong>{{ c.title }}</strong>{%- if c.description != blank -%}<span>{{ c.description | strip_html | truncate: 60 }}</span>{%- endif -%}</div>
+            </a>
+          {%- endif -%}
+        {%- endfor -%}
+      {%- else -%}
+        {%- for c in collections limit: 5 -%}
+          {%- unless c.handle == 'all' or c.handle == 'frontpage' -%}
+            {%- assign img = c.featured_image | default: c.products.first.featured_image -%}
+            <a class="cat-tile" href="{{ c.url }}">
+              {%- if img -%}{{ img | image_url: width: 600 | image_tag: loading: 'lazy', alt: '' }}{%- endif -%}
+              <div class="label"><strong>{{ c.title }}</strong></div>
+            </a>
+          {%- endunless -%}
+        {%- endfor -%}
+      {%- endif -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Rayons",
+  "settings": [
+    { "type": "text", "id": "kicker", "label": "Accroche", "default": "Les rayons" },
+    { "type": "text", "id": "title", "label": "Titre", "default": "Choisis ton univers" }
+  ],
+  "blocks": [
+    {
+      "type": "collection",
+      "name": "Rayon",
+      "settings": [
+        { "type": "collection", "id": "collection", "label": "Collection" },
+        { "type": "image_picker", "id": "image", "label": "Image (sinon la 1re photo de la collection)" }
+      ]
+    }
+  ],
+  "max_blocks": 5,
+  "presets": [{ "name": "Rayons" }]
+}
+{% endschema %}

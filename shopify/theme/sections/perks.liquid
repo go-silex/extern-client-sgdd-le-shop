@@ -1,0 +1,32 @@
+<section class="section"{% if section.settings.compact %} style="padding-top:0"{% endif %}>
+  <div class="wrap">
+    <div class="perks">
+      {%- for block in section.blocks -%}
+        <div class="perk" {{ block.shopify_attributes }}>
+          <div class="ico" aria-hidden="true">{{ block.settings.icon }}</div>
+          <strong>{{ block.settings.title }}</strong><span>{{ block.settings.text }}</span>
+        </div>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Points forts",
+  "settings": [{ "type": "checkbox", "id": "compact", "label": "Moins d'espace en haut", "default": true }],
+  "blocks": [
+    {
+      "type": "perk",
+      "name": "Point fort",
+      "settings": [
+        { "type": "text", "id": "icon", "label": "Icône (caractère)", "default": "★" },
+        { "type": "text", "id": "title", "label": "Titre", "default": "Dessiné à SGDD" },
+        { "type": "text", "id": "text", "label": "Texte", "default": "Des visuels maison, imprimés en petites séries." }
+      ]
+    }
+  ],
+  "max_blocks": 4,
+  "presets": [{ "name": "Points forts" }]
+}
+{% endschema %}

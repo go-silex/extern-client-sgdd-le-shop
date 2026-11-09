@@ -1,0 +1,1 @@
+{ "sections": { "main": { "type": "main-page", "settings": {} }, "mosaique": { "type": "image-mosaic", "settings": {} }, "venir": { "type": "visit", "settings": { "kicker": "Adresse", "title": "SGDD Le Shop", "fallback": "sgdd-entree-2.jpg" } } }, "order": ["main", "mosaique", "venir"] }

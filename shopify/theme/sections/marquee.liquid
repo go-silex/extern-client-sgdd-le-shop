@@ -1,0 +1,18 @@
+{%- assign words = section.settings.words | split: ',' -%}
+<div class="marquee" aria-hidden="true">
+  <div class="marquee-track">
+    {%- for i in (1..4) -%}
+      {%- for w in words -%}<span>{{ w | strip }}</span><span class="star">★</span>{%- endfor -%}
+    {%- endfor -%}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Bandeau défilant",
+  "settings": [
+    { "type": "text", "id": "words", "label": "Mots (séparés par des virgules)", "default": "SGDD, Surf, Skate, Chopper, Saint-Georges-de-Didonne, Place de Verdun" }
+  ],
+  "presets": [{ "name": "Bandeau défilant" }]
+}
+{% endschema %}

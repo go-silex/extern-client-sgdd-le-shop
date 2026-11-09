@@ -1,0 +1,54 @@
+[
+  {
+    "name": "theme_info",
+    "theme_name": "SGDD Le Shop",
+    "theme_version": "1.0.0",
+    "theme_author": "Unkillable Companies",
+    "theme_documentation_url": "https://unkill.si/sgdd",
+    "theme_support_url": "https://unkill.si/sgdd"
+  },
+  {
+    "name": "Couleurs",
+    "settings": [
+      { "type": "color", "id": "color_navy", "label": "Marine (texte, contours)", "default": "#1c2f6b" },
+      { "type": "color", "id": "color_yellow", "label": "Jaune (logo, accents)", "default": "#f7c623" },
+      { "type": "color", "id": "color_red", "label": "Rouge (boutons)", "default": "#d62b2b" },
+      { "type": "color", "id": "color_cream", "label": "Crème (fond)", "default": "#f7f1e6" }
+    ]
+  },
+  {
+    "name": "Logo",
+    "settings": [
+      { "type": "image_picker", "id": "logo", "label": "Logo image (sinon logo texte SGDD Le Shop)" },
+      { "type": "range", "id": "logo_width", "label": "Largeur du logo image", "min": 80, "max": 260, "step": 10, "unit": "px", "default": 150 },
+      { "type": "image_picker", "id": "favicon", "label": "Favicon" }
+    ]
+  },
+  {
+    "name": "Commande et retrait",
+    "settings": [
+      { "type": "paragraph", "content": "Ces textes s'affichent sur le site. Les vrais tarifs de livraison se règlent dans Réglages > Expédition et livraison." },
+      { "type": "number", "id": "free_shipping_threshold", "label": "Livraison offerte dès (€)", "default": 80 },
+      { "type": "checkbox", "id": "click_collect", "label": "Afficher le retrait en boutique", "default": true },
+      { "type": "text", "id": "order_note", "label": "Message sous le bouton de commande", "default": "Pas de paiement en ligne : Marco vous contacte sous 24 h pour le règlement (en boutique ou par virement)." }
+    ]
+  },
+  {
+    "name": "Pastilles de couleur",
+    "settings": [
+      {
+        "type": "textarea",
+        "id": "color_swatches",
+        "label": "Nom de couleur : code hexa (une par ligne)",
+        "default": "Rose:#f3c6cf\nCrème:#efe6d2\nBleu lagon:#a9dedb\nCiel:#c9dcef\nBleu roi:#1f5fae\nGris chiné:#b9b9b6\nVert:#2f8f6b\nNoir:#16181d\nBlanc:#f7f7f5\nRouge:#c9302c\nOrange:#e8762b\nÉcru:#efe9dc\nSable:#cdb999\nBleu de Chine:#23356e"
+      }
+    ]
+  },
+  {
+    "name": "Réseaux",
+    "settings": [
+      { "type": "text", "id": "facebook_url", "label": "Page Facebook", "default": "https://www.facebook.com/p/SGDD-Le-Shop-61576810880867/" },
+      { "type": "text", "id": "instagram_url", "label": "Instagram" }
+    ]
+  }
+]

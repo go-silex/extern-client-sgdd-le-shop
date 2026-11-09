@@ -1,0 +1,40 @@
+{
+  "sections": {
+    "hero": {
+      "type": "hero",
+      "blocks": {
+        "p1": { "type": "point", "settings": { "title": "Retrait gratuit", "text": "Place de Verdun" } },
+        "p2": { "type": "point", "settings": { "title": "Sans paiement en ligne", "text": "Marco vous recontacte" } },
+        "p3": { "type": "point", "settings": { "title": "100 % recommandé", "text": "Avis Facebook" } }
+      },
+      "block_order": ["p1", "p2", "p3"],
+      "settings": {}
+    },
+    "marquee": { "type": "marquee", "settings": {} },
+    "rayons": { "type": "collection-list", "settings": {} },
+    "selection": { "type": "featured-collection", "settings": {} },
+    "dessins": { "type": "image-gallery", "settings": {} },
+    "histoire": { "type": "story", "settings": {} },
+    "tribu": {
+      "type": "image-gallery",
+      "settings": {
+        "style": "tribe", "kicker": "La tribu SGDD", "title": "Vu sur notre page",
+        "link": "https://www.facebook.com/p/SGDD-Le-Shop-61576810880867/",
+        "fallback": "sgdd-mascotte.jpg, sgdd-lettres-plage.jpg, sgdd-motards.jpg, sgdd-stand.jpg, sgdd-mur-photos.jpg, sgdd-train.jpg"
+      }
+    },
+    "atouts": {
+      "type": "perks",
+      "blocks": {
+        "a1": { "type": "perk", "settings": { "icon": "★", "title": "Dessiné à SGDD", "text": "Des visuels maison, imprimés en petites séries." } },
+        "a2": { "type": "perk", "settings": { "icon": "✉", "title": "Commande sans paiement", "text": "Vous validez, Marco vous recontacte pour le règlement." } },
+        "a3": { "type": "perk", "settings": { "icon": "⌂", "title": "Retrait en boutique", "text": "Gratuit, au 7 place de Verdun." } },
+        "a4": { "type": "perk", "settings": { "icon": "↺", "title": "30 jours pour changer", "text": "Échange de taille en boutique ou par la poste." } }
+      },
+      "block_order": ["a1", "a2", "a3", "a4"],
+      "settings": {}
+    },
+    "venir": { "type": "visit", "settings": {} }
+  },
+  "order": ["hero", "marquee", "rayons", "selection", "dessins", "histoire", "tribu", "atouts", "venir"]
+}

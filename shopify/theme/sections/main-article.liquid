@@ -1,0 +1,9 @@
+<div class="wrap">
+  <div class="page-head"><div class="crumbs"><a href="{{ blog.url }}">{{ blog.title }}</a></div><h1 class="page-title">{{ article.title }}</h1><p>{{ article.published_at | date: '%d/%m/%Y' }}</p></div>
+  {%- if article.image -%}<div style="max-width:900px;margin-bottom:24px">{{ article.image | image_url: width: 1200 | image_tag: alt: article.title }}</div>{%- endif -%}
+  <div class="prose rte">{{ article.content }}</div>
+</div>
+
+{% schema %}
+{ "name": "Article", "settings": [] }
+{% endschema %}

@@ -1,0 +1,40 @@
+{%- comment -%} Row of square images (designs, community). Falls back to bundled brand images until blocks are set. {%- endcomment -%}
+{%- assign fallback = section.settings.fallback | split: ',' -%}
+<section class="section{% if section.settings.style == 'designs' %} designs{% endif %}">
+  <div class="wrap">
+    <div class="section-head">
+      <div>{%- if section.settings.kicker != blank -%}<span class="script">{{ section.settings.kicker }}</span>{%- endif -%}<h2>{{ section.settings.title }}</h2></div>
+      {%- if section.settings.link != blank -%}<a class="link-arrow" href="{{ section.settings.link }}" target="_blank" rel="noopener">{{ section.settings.link_label }} →</a>{%- endif -%}
+    </div>
+    <div class="{% if section.settings.style == 'designs' %}designs-row{% else %}tribe{% endif %}">
+      {%- if section.blocks.size > 0 -%}
+        {%- for block in section.blocks -%}
+          {%- if block.settings.image -%}{{ block.settings.image | image_url: width: 600 | image_tag: loading: 'lazy', alt: block.settings.alt }}{%- endif -%}
+        {%- endfor -%}
+      {%- else -%}
+        {%- for name in fallback -%}
+          <img src="{{ name | strip | asset_url }}" alt="" loading="lazy" width="414" height="414">
+        {%- endfor -%}
+      {%- endif -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Galerie d'images",
+  "settings": [
+    { "type": "select", "id": "style", "label": "Style", "options": [{ "value": "designs", "label": "4 grandes images" }, { "value": "tribe", "label": "6 vignettes" }], "default": "designs" },
+    { "type": "text", "id": "kicker", "label": "Accroche", "default": "Dessiné à SGDD" },
+    { "type": "text", "id": "title", "label": "Titre", "default": "Les dessins de la maison" },
+    { "type": "url", "id": "link", "label": "Lien" },
+    { "type": "text", "id": "link_label", "label": "Texte du lien", "default": "Suivre sur Facebook" },
+    { "type": "text", "id": "fallback", "label": "Images par défaut (fichiers du thème)", "default": "sgdd-dessin-surf.jpg, sgdd-dessin-velo.jpg, sgdd-dessin-chien-surf.jpg, sgdd-logo-moto.jpg" }
+  ],
+  "blocks": [
+    { "type": "image", "name": "Image", "settings": [ { "type": "image_picker", "id": "image", "label": "Image" }, { "type": "text", "id": "alt", "label": "Texte alternatif" } ] }
+  ],
+  "max_blocks": 6,
+  "presets": [{ "name": "Galerie d'images" }]
+}
+{% endschema %}

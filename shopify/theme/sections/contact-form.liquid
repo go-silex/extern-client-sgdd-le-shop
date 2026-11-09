@@ -1,0 +1,27 @@
+<div class="wrap">
+  <div class="panel" style="max-width:720px;margin-bottom:80px">
+    <h3>{{ section.settings.title }}</h3>
+    {%- form 'contact', id: 'ContactForm' -%}
+      {%- if form.posted_successfully? -%}
+        <p class="news-ok">Merci, votre message est parti. Marco vous répond vite.</p>
+      {%- else -%}
+        {%- if form.errors -%}<p class="form-error">{{ form.errors | default_errors }}</p>{%- endif -%}
+        <div class="row2">
+          <div class="field"><label for="ContactName">Nom</label><input id="ContactName" name="contact[name]" autocomplete="name" value="{{ form.name }}"></div>
+          <div class="field"><label for="ContactEmail">Email</label><input id="ContactEmail" type="email" name="contact[email]" required autocomplete="email" value="{{ form.email }}"></div>
+        </div>
+        <div class="field"><label for="ContactPhone">Téléphone</label><input id="ContactPhone" type="tel" name="contact[phone]" autocomplete="tel" value="{{ form.phone }}"></div>
+        <div class="field"><label for="ContactBody">Message</label><textarea id="ContactBody" name="contact[body]" rows="5" required>{{ form.body }}</textarea></div>
+        <button class="btn btn-primary" type="submit">Envoyer</button>
+      {%- endif -%}
+    {%- endform -%}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Formulaire de contact",
+  "settings": [{ "type": "text", "id": "title", "label": "Titre", "default": "Écrire à Marco" }],
+  "presets": [{ "name": "Formulaire de contact" }]
+}
+{% endschema %}

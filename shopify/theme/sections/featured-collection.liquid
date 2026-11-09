@@ -1,0 +1,27 @@
+{%- assign c = section.settings.collection | default: collections.all -%}
+<section class="section">
+  <div class="wrap">
+    <div class="section-head">
+      <div>{%- if section.settings.kicker != blank -%}<span class="script">{{ section.settings.kicker }}</span>{%- endif -%}<h2>{{ section.settings.title }}</h2></div>
+      <a class="link-arrow" href="{{ c.url | default: routes.all_products_collection_url }}">Tout voir →</a>
+    </div>
+    <div class="grid">
+      {%- for product in c.products limit: section.settings.limit -%}
+        {% render 'product-card', product: product %}
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Sélection d'articles",
+  "settings": [
+    { "type": "text", "id": "kicker", "label": "Accroche", "default": "Sur les cintres" },
+    { "type": "text", "id": "title", "label": "Titre", "default": "Les incontournables" },
+    { "type": "collection", "id": "collection", "label": "Collection (sinon tous les articles)" },
+    { "type": "range", "id": "limit", "label": "Nombre d'articles", "min": 4, "max": 12, "step": 4, "default": 8 }
+  ],
+  "presets": [{ "name": "Sélection d'articles" }]
+}
+{% endschema %}

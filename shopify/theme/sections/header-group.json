@@ -1,0 +1,17 @@
+{
+  "type": "header",
+  "name": "En-tête",
+  "sections": {
+    "announcement": {
+      "type": "announcement-bar",
+      "blocks": {
+        "m1": { "type": "message", "settings": { "text": "Livraison offerte dès 80 €" } },
+        "m2": { "type": "message", "settings": { "text": "Retrait gratuit place de Verdun" } }
+      },
+      "block_order": ["m1", "m2"],
+      "settings": {}
+    },
+    "header": { "type": "header", "settings": { "menu": "main-menu" } }
+  },
+  "order": ["announcement", "header"]
+}

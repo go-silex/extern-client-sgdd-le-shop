@@ -1,0 +1,49 @@
+<footer class="footer">
+  <div class="pennants" aria-hidden="true"></div>
+  <div class="footer-inner">
+    <div class="footer-brand">
+      {% render 'logo', size: 'lg' %}
+      {%- if section.settings.text != blank -%}<p>{{ section.settings.text }}</p>{%- endif -%}
+    </div>
+    {%- for i in (1..2) -%}
+      {%- liquid
+        assign key = 'menu_' | append: i
+        assign menu = section.settings[key]
+      -%}
+      {%- if menu.links.size > 0 -%}
+        <div>
+          <h4>{{ menu.title }}</h4>
+          {%- for link in menu.links -%}<a href="{{ link.url }}">{{ link.title }}</a>{%- endfor -%}
+        </div>
+      {%- endif -%}
+    {%- endfor -%}
+    <div>
+      <h4>Venir</h4>
+      <p class="footer-address">{{ section.settings.address | newline_to_br }}</p>
+      {%- if section.settings.map_url != blank -%}<a href="{{ section.settings.map_url }}" target="_blank" rel="noopener">Itinéraire</a>{%- endif -%}
+      {%- if settings.facebook_url != blank -%}<a href="{{ settings.facebook_url }}" target="_blank" rel="noopener">Facebook</a>{%- endif -%}
+      {%- if settings.instagram_url != blank -%}<a href="{{ settings.instagram_url }}" target="_blank" rel="noopener">Instagram</a>{%- endif -%}
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© {{ 'now' | date: '%Y' }} {{ shop.name }}</span>
+    <span class="footer-policies">
+      {%- for policy in shop.policies -%}<a href="{{ policy.url }}">{{ policy.title }}</a>{%- endfor -%}
+    </span>
+  </div>
+</footer>
+
+{% schema %}
+{
+  "name": "Pied de page",
+  "class": "section-footer",
+  "settings": [
+    { "type": "text", "id": "text", "label": "Texte", "default": "Concept store à Saint-Georges-de-Didonne. SGDD au cœur du projet, univers surf, skate et chopper." },
+    { "type": "link_list", "id": "menu_1", "label": "Menu colonne 1", "default": "footer" },
+    { "type": "link_list", "id": "menu_2", "label": "Menu colonne 2" },
+    { "type": "textarea", "id": "address", "label": "Adresse", "default": "7 place de Verdun\n17110 Saint-Georges-de-Didonne" },
+    { "type": "text", "id": "map_url", "label": "Lien itinéraire", "default": "https://www.google.com/maps/search/?api=1&query=7+place+de+Verdun+17110+Saint-Georges-de-Didonne" }
+  ],
+  "enabled_on": { "groups": ["footer"] }
+}
+{% endschema %}

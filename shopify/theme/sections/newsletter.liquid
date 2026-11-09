@@ -1,0 +1,30 @@
+<section class="news">
+  <div class="wrap news-inner">
+    <div>
+      <h3>{{ section.settings.title }}</h3>
+      {%- if section.settings.text != blank -%}<p>{{ section.settings.text }}</p>{%- endif -%}
+    </div>
+    {%- form 'customer', id: 'newsletter-form' -%}
+      <input type="hidden" name="contact[tags]" value="newsletter">
+      {%- if form.posted_successfully? -%}
+        <p class="news-ok">Merci, c'est noté.</p>
+      {%- else -%}
+        <input type="email" name="contact[email]" required placeholder="Votre email" aria-label="Votre email" autocomplete="email">
+        <button class="btn btn-primary" type="submit">Je m'inscris</button>
+      {%- endif -%}
+      {%- if form.errors -%}<p class="form-error">{{ form.errors | default_errors }}</p>{%- endif -%}
+    {%- endform -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Newsletter",
+  "class": "section-newsletter",
+  "settings": [
+    { "type": "text", "id": "title", "label": "Titre", "default": "Les nouveaux drops en premier" },
+    { "type": "text", "id": "text", "label": "Texte", "default": "Un email quand une nouvelle série SGDD arrive. Pas plus." }
+  ],
+  "presets": [{ "name": "Newsletter" }]
+}
+{% endschema %}

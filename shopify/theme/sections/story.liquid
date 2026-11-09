@@ -1,0 +1,29 @@
+<section class="section story">
+  <div class="wrap story-inner">
+    <div>
+      {%- if section.settings.kicker != blank -%}<span class="script">{{ section.settings.kicker }}</span>{%- endif -%}
+      <h2>{{ section.settings.title }}</h2>
+      {{ section.settings.text }}
+      {%- if section.settings.signature != blank -%}<div class="signature">{{ section.settings.signature }}</div>{%- endif -%}
+    </div>
+    <div class="story-photos">
+      {%- if section.settings.image_1 -%}{{ section.settings.image_1 | image_url: width: 600 | image_tag: loading: 'lazy', alt: '' }}{%- else -%}<img src="{{ 'sgdd-atelier.jpg' | asset_url }}" alt="Dans la boutique" loading="lazy" width="414" height="414">{%- endif -%}
+      {%- if section.settings.image_2 -%}{{ section.settings.image_2 | image_url: width: 600 | image_tag: loading: 'lazy', alt: '' }}{%- else -%}<img src="{{ 'sgdd-stand-plage.jpg' | asset_url }}" alt="Le stand SGDD sur la plage" loading="lazy" width="414" height="414">{%- endif -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Histoire",
+  "settings": [
+    { "type": "text", "id": "kicker", "label": "Accroche", "default": "L'histoire" },
+    { "type": "text", "id": "title", "label": "Titre", "default": "SGDD au cœur du projet" },
+    { "type": "richtext", "id": "text", "label": "Texte", "default": "<p>SGDD, c'est Saint-Georges-de-Didonne. Marco a ouvert un concept store qui ressemble à la ville : la plage, les planches, les motos qui remontent le front de mer et un peu d'Amérique accrochée aux murs.</p><p>Les visuels SGDD sont dessinés pour la boutique et imprimés en petites séries.</p>" },
+    { "type": "text", "id": "signature", "label": "Signature", "default": "Marco" },
+    { "type": "image_picker", "id": "image_1", "label": "Photo 1" },
+    { "type": "image_picker", "id": "image_2", "label": "Photo 2" }
+  ],
+  "presets": [{ "name": "Histoire" }]
+}
+{% endschema %}

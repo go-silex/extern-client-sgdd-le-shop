@@ -1,0 +1,46 @@
+{%- comment -%} Product card. Badge comes from a tag "badge:Nouveau". {%- endcomment -%}
+{%- liquid
+  assign badge = ''
+  for tag in product.tags
+    if tag contains 'badge:'
+      assign badge = tag | remove: 'badge:'
+    endif
+  endfor
+  assign contain = false
+  if product.type == 'Skate' or product.type == 'Déco' or product.type == 'Surf'
+    assign contain = true
+  endif
+  assign color_option = product.options_with_values | where: 'name', 'Couleur' | first
+-%}
+<a class="card{% unless product.available %} is-out{% endunless %}" href="{{ product.url }}">
+  <div class="card-media{% if contain %} contain{% endif %}">
+    {%- if product.available == false -%}
+      <span class="badge badge-out">Épuisé</span>
+    {%- elsif badge != blank -%}
+      <span class="badge">{{ badge }}</span>
+    {%- endif -%}
+    {%- if product.featured_image -%}
+      {{ product.featured_image | image_url: width: 700 | image_tag: loading: 'lazy', widths: '300, 450, 700', sizes: '(min-width: 1080px) 25vw, 50vw', alt: product.title }}
+    {%- elsif product.gift_card? -%}
+      {% render 'giftcard-visual' %}
+    {%- endif -%}
+    {%- if product.available and product.has_only_default_variant -%}
+      <button class="quick-add" type="button" data-quick-variant="{{ product.selected_or_first_available_variant.id }}" aria-label="Ajouter {{ product.title | escape }} au panier">+</button>
+    {%- endif -%}
+  </div>
+  <div class="card-body">
+    <div class="card-type">{{ product.type }}</div>
+    <div class="card-name">{{ product.title }}</div>
+    <div class="card-row">
+      <span class="price">{% if product.price_varies %}Dès {% endif %}{{ product.price_min | money }}</span>
+      {%- if color_option and product.gift_card? == false -%}
+        <span class="swatches">
+          {%- for value in color_option.values -%}
+            {%- capture hex %}{% render 'swatch-color', name: value %}{% endcapture -%}
+            <i style="background:{{ hex | strip | default: '#ddd' }}" title="{{ value | escape }}"></i>
+          {%- endfor -%}
+        </span>
+      {%- endif -%}
+    </div>
+  </div>
+</a>

@@ -1,0 +1,17 @@
+{
+  "current": "Default",
+  "presets": {
+    "Default": {
+      "color_navy": "#1c2f6b",
+      "color_yellow": "#f7c623",
+      "color_red": "#d62b2b",
+      "color_cream": "#f7f1e6",
+      "logo_width": 150,
+      "free_shipping_threshold": 80,
+      "click_collect": true,
+      "order_note": "Pas de paiement en ligne : Marco vous contacte sous 24 h pour le règlement (en boutique ou par virement).",
+      "color_swatches": "Rose:#f3c6cf\nCrème:#efe6d2\nBleu lagon:#a9dedb\nCiel:#c9dcef\nBleu roi:#1f5fae\nGris chiné:#b9b9b6\nVert:#2f8f6b\nNoir:#16181d\nBlanc:#f7f7f5\nRouge:#c9302c\nOrange:#e8762b\nÉcru:#efe9dc\nSable:#cdb999\nBleu de Chine:#23356e",
+      "facebook_url": "https://www.facebook.com/p/SGDD-Le-Shop-61576810880867/"
+    }
+  }
+}

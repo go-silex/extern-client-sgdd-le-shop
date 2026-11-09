@@ -1,0 +1,30 @@
+<div class="wrap">
+  <div class="page-head">
+    <h1 class="page-title">{% if search.performed %}Recherche : « {{ search.terms | escape }} »{% else %}Rechercher{% endif %}</h1>
+    <form action="{{ routes.search_url }}" method="get" role="search" class="search-page-form">
+      <input type="search" name="q" value="{{ search.terms | escape }}" placeholder="Hoodie, casquette, skate..." aria-label="Rechercher">
+      <input type="hidden" name="type" value="product">
+      <button class="btn btn-primary" type="submit">Rechercher</button>
+    </form>
+  </div>
+  {%- if search.performed -%}
+    {%- paginate search.results by 24 -%}
+      <p class="result-count">{{ search.results_count }} résultat{% if search.results_count > 1 %}s{% endif %}</p>
+      {%- if search.results.size > 0 -%}
+        <div class="grid">
+          {%- for item in search.results -%}
+            {%- if item.object_type == 'product' -%}{% render 'product-card', product: item %}{%- endif -%}
+          {%- endfor -%}
+        </div>
+      {%- else -%}
+        <div class="empty"><p>Rien trouvé. Essayez « hoodie » ou « casquette ».</p></div>
+      {%- endif -%}
+      {%- if paginate.pages > 1 -%}<nav class="pagination" aria-label="Pages">{{ paginate | default_pagination }}</nav>{%- endif -%}
+    {%- endpaginate -%}
+  {%- endif -%}
+  <div style="height:80px"></div>
+</div>
+
+{% schema %}
+{ "name": "Recherche", "settings": [] }
+{% endschema %}

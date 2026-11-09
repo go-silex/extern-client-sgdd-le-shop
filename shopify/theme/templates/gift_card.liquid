@@ -1,0 +1,36 @@
+{% layout none %}
+<!doctype html>
+<html lang="{{ request.locale.iso_code }}">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Carte cadeau {{ gift_card.balance | money }} | {{ shop.name }}</title>
+    {% # theme-check-disable RemoteAsset %}
+    <link href="https://fonts.googleapis.com/css2?family=Titan+One&family=Yellowtail&family=DM+Sans:opsz,wght@9..40,400;9..40,700&display=swap" rel="stylesheet">
+    {% # theme-check-enable RemoteAsset %}
+    {{ 'theme.css' | asset_url | stylesheet_tag }}
+    <script src="{{ 'vendor/qrcode.js' | shopify_asset_url }}" defer></script>
+    {{ content_for_header }}
+  </head>
+  <body>
+    <div class="adm-login">
+      <div class="adm-login-card">
+        {% render 'logo', size: 'lg' %}
+        <h1>Votre carte cadeau</h1>
+        <p class="pdp-price">{{ gift_card.balance | money }}</p>
+        {%- if gift_card.expired or gift_card.enabled == false -%}<p class="form-error">Cette carte n'est plus valable.</p>{%- endif -%}
+        <p>Code : <strong>{{ gift_card.code | format_code }}</strong></p>
+        {%- if gift_card.expires_on -%}<p>Valable jusqu'au {{ gift_card.expires_on | date: '%d/%m/%Y' }}</p>{%- endif -%}
+        <div id="QrCode" data-identifier="{{ gift_card.qr_identifier }}" style="display:flex;justify-content:center;margin:16px 0"></div>
+        <a class="btn btn-primary btn-block" href="{{ shop.url }}">Utiliser sur la boutique</a>
+        <p class="demo-note" style="margin-top:14px">Utilisable en ligne et au 7 place de Verdun.</p>
+      </div>
+    </div>
+    <script>
+      window.addEventListener('load', function () {
+        var el = document.getElementById('QrCode');
+        if (window.QRCode && el) new QRCode(el, { text: el.dataset.identifier, width: 140, height: 140 });
+      });
+    </script>
+  </body>
+</html>

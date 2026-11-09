@@ -1,0 +1,18 @@
+<div class="wrap">
+  <div class="page-head"><h1 class="page-title">Les rayons</h1></div>
+  <div class="cats cats-5" style="margin-bottom:80px">
+    {%- for c in collections -%}
+      {%- unless c.handle == 'frontpage' -%}
+        {%- assign img = c.featured_image | default: c.products.first.featured_image -%}
+        <a class="cat-tile" href="{{ c.url }}">
+          {%- if img -%}{{ img | image_url: width: 600 | image_tag: loading: 'lazy', alt: '' }}{%- endif -%}
+          <div class="label"><strong>{{ c.title }}</strong><span>{{ c.products_count }} articles</span></div>
+        </a>
+      {%- endunless -%}
+    {%- endfor -%}
+  </div>
+</div>
+
+{% schema %}
+{ "name": "Liste des rayons", "settings": [] }
+{% endschema %}

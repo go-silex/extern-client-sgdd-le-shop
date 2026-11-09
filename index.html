@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>SGDD Le Shop | Surf, skate & chopper à Saint-Georges-de-Didonne</title>
+  <meta name="description" content="Concept store à Saint-Georges-de-Didonne. Collection SGDD, Jay'M Riding, surf, skate et vintage US. Livraison en France et click & collect place de Verdun.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Titan+One&family=Yellowtail&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css?v=4">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%231c2f6b'/%3E%3Ctext x='32' y='44' font-family='Arial Black' font-size='30' text-anchor='middle' fill='%23f7c623'%3ESG%3C/text%3E%3C/svg%3E">
+</head>
+<body>
+  <div class="topbar" id="topbar"></div>
+
+  <header class="header">
+    <div class="header-inner">
+      <button class="icon-btn menu-btn" aria-label="Menu" data-action="menu">
+        <svg viewBox="0 0 24 24" width="24" height="24"><path d="M3 6h18M3 12h18M3 18h18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+      </button>
+      <a href="#/" class="logo" aria-label="SGDD Le Shop, accueil">
+        <span class="logo-sgdd">SGDD</span><span class="logo-shop">Le Shop</span>
+      </a>
+      <nav class="nav" id="nav">
+        <a href="#/shop">Tout le shop</a>
+        <a href="#/shop/sgdd">Collection SGDD</a>
+        <a href="#/shop/jaym">Jay'M Riding</a>
+        <a href="#/shop/surf-skate">Surf & Skate</a>
+        <a href="#/shop/vintage">Vintage US</a>
+        <a href="#/boutique">La boutique</a>
+      </nav>
+      <div class="header-actions">
+        <button class="icon-btn" aria-label="Rechercher" data-action="search">
+          <svg viewBox="0 0 24 24" width="22" height="22"><circle cx="11" cy="11" r="7" fill="none" stroke="currentColor" stroke-width="2"/><path d="M20 20l-4-4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+        </button>
+        <button class="icon-btn cart-btn" aria-label="Panier" data-action="cart">
+          <svg viewBox="0 0 24 24" width="22" height="22"><path d="M5 8h14l-1.2 11.2a2 2 0 0 1-2 1.8H8.2a2 2 0 0 1-2-1.8L5 8z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M9 8V6a3 3 0 0 1 6 0v2" fill="none" stroke="currentColor" stroke-width="2"/></svg>
+          <span class="cart-count" id="cartCount">0</span>
+        </button>
+      </div>
+    </div>
+    <div class="search-bar" id="searchBar" hidden>
+      <input type="search" id="searchInput" placeholder="Hoodie, casquette, skate..." aria-label="Rechercher un article">
+    </div>
+  </header>
+
+  <main id="app" tabindex="-1"></main>
+
+  <footer class="footer">
+    <div class="pennants" aria-hidden="true"></div>
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <a href="#/" class="logo logo-lg" aria-label="SGDD Le Shop">
+          <span class="logo-sgdd">SGDD</span><span class="logo-shop">Le Shop</span>
+        </a>
+        <p>Concept store à Saint-Georges-de-Didonne. SGDD au cœur du projet, univers surf, skate et chopper.</p>
+      </div>
+      <div>
+        <h4>Le shop</h4>
+        <a href="#/shop/sgdd">Collection SGDD</a>
+        <a href="#/shop/jaym">Jay'M Riding</a>
+        <a href="#/shop/surf-skate">Surf & Skate</a>
+        <a href="#/shop/vintage">Déco & vintage US</a>
+        <a href="#/p/carte-cadeau">Carte cadeau</a>
+      </div>
+      <div>
+        <h4>Infos</h4>
+        <a href="#/boutique">La boutique</a>
+        <a href="#/infos">Livraison & retours</a>
+        <a href="#/infos">Guide des tailles</a>
+        <a href="#/admin">Espace gérant</a>
+        <a href="https://www.facebook.com/p/SGDD-Le-Shop-61576810880867/" target="_blank" rel="noopener">Facebook</a>
+      </div>
+      <div>
+        <h4>Venir</h4>
+        <p>7 place de Verdun<br>17110 Saint-Georges-de-Didonne</p>
+        <a href="https://www.google.com/maps/search/?api=1&query=7+place+de+Verdun+17110+Saint-Georges-de-Didonne" target="_blank" rel="noopener">Itinéraire</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 SGDD Le Shop</span>
+      <span>Site de démonstration</span>
+    </div>
+  </footer>
+
+  <div class="overlay" id="overlay" hidden></div>
+  <aside class="drawer" id="cartDrawer" aria-label="Panier" aria-hidden="true"></aside>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <script src="config.js?v=4"></script>
+  <script src="products.js?v=4"></script>
+  <script src="admin.js?v=4"></script>
+  <script src="app.js?v=4"></script>
+</body>
+</html>

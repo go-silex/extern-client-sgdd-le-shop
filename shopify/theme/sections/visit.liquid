@@ -1,0 +1,37 @@
+<section class="section" style="padding-top:0">
+  <div class="wrap">
+    <div class="visit">
+      {%- if section.settings.image -%}
+        {{ section.settings.image | image_url: width: 900 | image_tag: loading: 'lazy', alt: section.settings.title }}
+      {%- else -%}
+        <img src="{{ section.settings.fallback | asset_url }}" alt="{{ section.settings.title | escape }}" loading="lazy" width="360" height="480">
+      {%- endif -%}
+      <div class="visit-body">
+        {%- if section.settings.kicker != blank -%}<span class="script">{{ section.settings.kicker }}</span>{%- endif -%}
+        <h3>{{ section.settings.title }}</h3>
+        <address>{{ section.settings.address | newline_to_br }}</address>
+        {{ section.settings.text }}
+        <div class="hero-ctas">
+          {%- if section.settings.map_url != blank -%}<a class="btn btn-primary" target="_blank" rel="noopener" href="{{ section.settings.map_url }}">Itinéraire</a>{%- endif -%}
+          {%- if settings.facebook_url != blank -%}<a class="btn btn-secondary" target="_blank" rel="noopener" href="{{ settings.facebook_url }}">Facebook</a>{%- endif -%}
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Venir à la boutique",
+  "settings": [
+    { "type": "text", "id": "kicker", "label": "Accroche", "default": "Venir nous voir" },
+    { "type": "text", "id": "title", "label": "Titre", "default": "Sous les arcades, place de Verdun" },
+    { "type": "textarea", "id": "address", "label": "Adresse", "default": "7 place de Verdun\n17110 Saint-Georges-de-Didonne" },
+    { "type": "richtext", "id": "text", "label": "Horaires / infos", "default": "<p>Les horaires du moment et les arrivages sont publiés sur notre page Facebook.</p>" },
+    { "type": "text", "id": "map_url", "label": "Lien itinéraire", "default": "https://www.google.com/maps/search/?api=1&query=7+place+de+Verdun+17110+Saint-Georges-de-Didonne" },
+    { "type": "image_picker", "id": "image", "label": "Photo" },
+    { "type": "text", "id": "fallback", "label": "Photo par défaut (fichier du thème)", "default": "sgdd-arcades.jpg" }
+  ],
+  "presets": [{ "name": "Venir à la boutique" }]
+}
+{% endschema %}

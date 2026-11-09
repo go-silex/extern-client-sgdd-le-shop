@@ -1,0 +1,661 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mettre SGDD Le Shop en ligne : le guide</title>
+<meta name="description" content="Le guide pas à pas pour mettre en ligne le site de SGDD Le Shop, avec Shopify ou avec son propre site.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Titan+One&family=Yellowtail&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #1c2f6b; --navy-deep: #13214d; --yellow: #f7c623; --red: #d62b2b;
+    --cream: #f7f1e6; --white: #fffdf8; --sand: #ece1cc; --line: #e2d8c4;
+    --ink: #1b1d24; --muted: #555a6b; --green: #2f8f4e; --green-bg: #e3f3e8; --red-bg: #fde7e6;
+    --radius: 14px;
+    --display: 'Titan One', 'Arial Black', sans-serif;
+    --script: 'Yellowtail', cursive;
+    --body: 'DM Sans', system-ui, -apple-system, sans-serif;
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { margin: 0; background: var(--cream); color: var(--ink); font-family: var(--body); font-size: 18px; line-height: 1.6; -webkit-font-smoothing: antialiased; }
+  a { color: var(--navy); font-weight: 700; }
+  img { max-width: 100%; }
+  .wrap { max-width: 1120px; margin: 0 auto; padding: 0 20px; }
+
+  /* Header */
+  .top { background: var(--navy); color: var(--cream); padding: 44px 0 52px; border-bottom: 4px solid var(--yellow); }
+  .logo { display: inline-flex; align-items: baseline; text-decoration: none; }
+  .logo-sgdd { font-family: var(--display); font-size: 44px; color: var(--yellow); -webkit-text-stroke: 2px var(--navy-deep); paint-order: stroke fill; text-shadow: 3px 3px 0 #0b1533; letter-spacing: .02em; }
+  .logo-shop { font-family: var(--script); font-size: 34px; color: var(--red); margin-left: -4px; transform: rotate(-7deg) translateY(10px); text-shadow: -1.5px -1.5px 0 #fff, 1.5px 1.5px 0 #fff, 3px 3px 0 #0b1533; }
+  .top h1 { font-family: var(--display); font-weight: 400; font-size: clamp(32px, 5vw, 52px); line-height: 1.08; margin: 22px 0 14px; color: #fff; }
+  .top p { font-size: 20px; max-width: 760px; color: #dfe3f0; margin: 0 0 10px; }
+  .from { margin-top: 18px !important; font-size: 16px !important; color: #b9c0dc !important; }
+
+  /* Layout */
+  .layout { display: grid; grid-template-columns: 250px 1fr; gap: 40px; align-items: start; padding: 36px 0 80px; }
+  nav.toc { position: sticky; top: 16px; max-height: calc(100vh - 32px); overflow-y: auto; background: var(--white); border: 2px solid var(--navy); border-radius: var(--radius); padding: 16px 16px 12px; font-size: 15px; }
+  nav.toc strong { display: block; font-family: var(--display); font-weight: 400; color: var(--navy); font-size: 18px; margin-bottom: 8px; }
+  nav.toc a { display: block; text-decoration: none; font-weight: 500; color: var(--ink); padding: 5px 8px; border-radius: 8px; }
+  nav.toc a:hover { background: var(--sand); }
+  nav.toc .sub { padding-left: 20px; font-size: 14px; color: var(--muted); }
+  main { min-width: 0; }
+
+  section { margin-bottom: 56px; scroll-margin-top: 16px; }
+  h2 { font-family: var(--display); font-weight: 400; color: var(--navy); font-size: clamp(28px, 3.6vw, 38px); line-height: 1.1; margin: 0 0 8px; }
+  h3 { font-size: 22px; color: var(--navy); margin: 30px 0 10px; }
+  .kicker { font-family: var(--script); color: var(--red); font-size: 28px; display: block; margin-bottom: 0; }
+  .lead { font-size: 20px; color: var(--muted); margin: 6px 0 20px; }
+
+  /* Boxes */
+  .box { background: var(--white); border: 2px solid var(--line); border-radius: var(--radius); padding: 20px 22px; margin: 16px 0; }
+  .box.nephew { border-color: var(--navy); background: #eef1fb; }
+  .box.warn { border-color: #e2a400; background: #fff6d9; }
+  .box.ok { border-color: var(--green); background: var(--green-bg); }
+  .box h4 { margin: 0 0 6px; font-size: 18px; color: var(--navy); }
+  .box p:last-child, .box ul:last-child, .box ol:last-child { margin-bottom: 0; }
+  .tag { display: inline-block; font-size: 13px; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; padding: 3px 10px; border-radius: 99px; background: var(--navy); color: var(--yellow); margin-bottom: 8px; }
+  .tag.marco { background: var(--red); color: #fff; }
+  .tag.both { background: var(--yellow); color: var(--navy); }
+
+  /* Cards */
+  .cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin: 18px 0; }
+  .card { background: var(--white); border: 2px solid var(--navy); border-radius: var(--radius); padding: 18px; box-shadow: 4px 4px 0 var(--navy); }
+  .card .ico { font-size: 30px; }
+  .card h4 { margin: 6px 0 6px; color: var(--navy); font-size: 19px; }
+  .card p { margin: 0 0 10px; font-size: 16px; color: var(--muted); }
+  .btn { display: inline-block; background: var(--red); color: #fff; text-decoration: none; padding: 10px 18px; border-radius: 99px; border: 2px solid var(--navy); box-shadow: 3px 3px 0 var(--navy); font-size: 16px; margin: 4px 6px 4px 0; }
+  .btn.alt { background: var(--white); color: var(--navy); }
+
+  /* Comparison */
+  .compare { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; margin: 20px 0; }
+  .option { background: var(--white); border: 2px solid var(--navy); border-radius: var(--radius); overflow: hidden; }
+  .option header { background: var(--navy); color: #fff; padding: 16px 20px; }
+  .option header .name { font-family: var(--display); font-size: 26px; line-height: 1.1; }
+  .option header .sub { font-size: 15px; color: #c9cfe6; }
+  .option .reco { display: inline-block; margin-top: 8px; background: var(--yellow); color: var(--navy); font-weight: 700; font-size: 13px; padding: 3px 10px; border-radius: 99px; }
+  .option .body { padding: 16px 20px 20px; }
+  .option ul { list-style: none; padding: 0; margin: 8px 0 14px; }
+  .option li { padding: 6px 0 6px 30px; position: relative; font-size: 16px; border-bottom: 1px dashed var(--line); }
+  .option li:last-child { border-bottom: 0; }
+  .option li::before { position: absolute; left: 2px; top: 6px; font-weight: 700; }
+  .pros li::before { content: '✓'; color: var(--green); }
+  .cons li::before { content: '✕'; color: var(--red); }
+  .option h5 { margin: 12px 0 0; font-size: 15px; text-transform: uppercase; letter-spacing: .06em; color: var(--muted); }
+
+  table { width: 100%; border-collapse: collapse; background: var(--white); border: 2px solid var(--navy); border-radius: var(--radius); overflow: hidden; font-size: 16px; margin: 16px 0; }
+  th, td { padding: 12px 14px; border-bottom: 1px solid var(--line); text-align: left; vertical-align: top; }
+  th { background: var(--navy); color: var(--yellow); font-weight: 700; }
+  tr:last-child td { border-bottom: 0; }
+  td:first-child { font-weight: 700; color: var(--navy); width: 26%; }
+
+  /* Steps */
+  ol.steps { list-style: none; counter-reset: step; padding: 0; margin: 18px 0; }
+  ol.steps > li { counter-increment: step; position: relative; background: var(--white); border: 2px solid var(--line); border-radius: var(--radius); padding: 18px 20px 18px 74px; margin-bottom: 14px; }
+  ol.steps > li::before { content: counter(step); position: absolute; left: 18px; top: 16px; width: 40px; height: 40px; border-radius: 50%; background: var(--yellow); border: 2px solid var(--navy); color: var(--navy); font-family: var(--display); font-size: 20px; display: grid; place-items: center; }
+  ol.steps > li.done { border-color: var(--green); background: var(--green-bg); }
+  ol.steps > li > strong:first-child, .step-title { display: block; font-size: 19px; font-weight: 700; color: var(--navy); margin-bottom: 4px; padding-right: 70px; }
+  ol.steps ul, ol.steps ol { margin: 8px 0; padding-left: 22px; }
+  ol.steps li li { margin-bottom: 4px; }
+  .check { position: absolute; right: 16px; top: 16px; display: flex; align-items: center; gap: 6px; font-size: 14px; color: var(--muted); cursor: pointer; user-select: none; }
+  .check input { width: 20px; height: 20px; accent-color: var(--green); cursor: pointer; }
+  .click { display: inline-block; background: var(--sand); border: 1px solid #cdbf9f; border-radius: 6px; padding: 0 7px; font-weight: 700; font-size: .92em; white-space: nowrap; }
+  code { background: #eef1fb; border: 1px solid #ccd3ee; border-radius: 6px; padding: 1px 6px; font-size: .88em; word-break: break-word; }
+  pre { background: var(--navy-deep); color: #e6e9f5; border-radius: 10px; padding: 14px 16px; overflow-x: auto; font-size: 14px; line-height: 1.5; }
+  pre code { background: none; border: 0; color: inherit; padding: 0; }
+  .time { display: inline-block; font-size: 14px; color: var(--muted); margin-left: 6px; font-weight: 500; }
+  .progress { background: var(--white); border: 2px solid var(--navy); border-radius: 99px; height: 14px; overflow: hidden; margin: 6px 0 4px; }
+  .progress i { display: block; height: 100%; background: var(--green); width: 0; transition: width .3s; }
+  .progress-label { font-size: 14px; color: var(--muted); }
+
+  details { background: var(--white); border: 2px solid var(--line); border-radius: var(--radius); padding: 14px 18px; margin: 10px 0; }
+  details summary { font-weight: 700; color: var(--navy); cursor: pointer; font-size: 18px; }
+  details[open] summary { margin-bottom: 8px; }
+
+  .files { display: grid; grid-template-columns: 1fr; gap: 0; border: 2px solid var(--navy); border-radius: var(--radius); overflow: hidden; background: var(--white); margin: 14px 0; }
+  .files div { display: grid; grid-template-columns: 220px 1fr; gap: 12px; padding: 10px 14px; border-bottom: 1px solid var(--line); font-size: 16px; }
+  .files div:last-child { border-bottom: 0; }
+  .files code { align-self: start; }
+
+  footer { background: var(--navy-deep); color: #c9cde0; padding: 34px 0 44px; font-size: 16px; }
+  footer a { color: var(--yellow); }
+
+  @media (max-width: 900px) {
+    .layout { grid-template-columns: 1fr; }
+    nav.toc { position: static; max-height: none; }
+    .cards, .compare { grid-template-columns: 1fr; }
+    .files div { grid-template-columns: 1fr; gap: 4px; }
+  }
+  @media (max-width: 560px) {
+    body { font-size: 17px; }
+    ol.steps > li { padding: 62px 16px 16px; }
+    ol.steps > li::before { left: 16px; top: 14px; }
+    .check { top: 20px; right: 14px; }
+    table { font-size: 14px; table-layout: fixed; }
+    th, td { padding: 8px 7px; overflow-wrap: anywhere; }
+    .click { white-space: normal; }
+    pre { max-width: calc(100vw - 80px); }
+    td:first-child { width: auto; }
+  }
+  @media print {
+    nav.toc, .check, .btn { display: none !important; }
+    .layout { grid-template-columns: 1fr; }
+    body { background: #fff; font-size: 13pt; }
+    section { break-inside: avoid-page; }
+  }
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="wrap">
+    <span class="logo"><span class="logo-sgdd">SGDD</span><span class="logo-shop">Le Shop</span></span>
+    <h1>Mettre ta boutique en ligne,<br>étape par étape</h1>
+    <p>Marco, ce guide t'explique tout ce qu'on a préparé pour SGDD Le Shop et comment le mettre en ligne. Aucune connaissance en informatique n'est nécessaire pour le lire.</p>
+    <p>Il y a deux chemins possibles. On les compare, puis chaque chemin est détaillé clic par clic.</p>
+    <p class="from">Préparé par Pierre Paris (Unkillable Companies) · novembre 2026</p>
+  </div>
+</header>
+
+<div class="wrap layout">
+  <nav class="toc" aria-label="Sommaire">
+    <strong>Sommaire</strong>
+    <a href="#neveu">1. Pour ton neveu</a>
+    <a href="#prepare">2. Ce qu'on a préparé</a>
+    <a href="#mots">3. Les mots à connaître</a>
+    <a href="#choix">4. Shopify ou ton propre site ?</a>
+    <a href="#avant">5. À réunir avant de commencer</a>
+    <a href="#shopify">6. Chemin A : Shopify</a>
+    <a class="sub" href="#a-recuperer">A1. Récupérer la boutique prête</a>
+    <a class="sub" href="#a-zero">A2. Ou partir de zéro</a>
+    <a class="sub" href="#a-produits">A3. Gérer les articles</a>
+    <a class="sub" href="#a-commandes">A4. Gérer les commandes</a>
+    <a class="sub" href="#a-ouvrir">A5. Ouvrir au public</a>
+    <a href="#site">7. Chemin B : ton propre site</a>
+    <a class="sub" href="#b-telecharger">B1. Télécharger le site</a>
+    <a class="sub" href="#b-modifier">B2. Mettre tes infos</a>
+    <a class="sub" href="#b-commandes">B3. Recevoir les commandes</a>
+    <a class="sub" href="#b-enligne">B4. Mettre en ligne</a>
+    <a class="sub" href="#b-quotidien">B5. Au quotidien</a>
+    <a href="#domaine">8. Ton adresse internet</a>
+    <a href="#legal">9. Les obligations légales</a>
+    <a href="#checklist">10. Avant d'ouvrir</a>
+    <a href="#faq">11. Questions fréquentes</a>
+    <a href="#aide">12. Besoin d'aide</a>
+    <div style="margin-top:12px">
+      <div class="progress"><i id="bar"></i></div>
+      <span class="progress-label" id="barLabel">0 étape cochée</span>
+    </div>
+  </nav>
+
+  <main>
+
+    <!-- 1 -->
+    <section id="neveu">
+      <span class="kicker">Avant tout</span>
+      <h2>Montre ce guide à ton neveu</h2>
+      <div class="box nephew">
+        <span class="tag">Pour ton neveu</span>
+        <p>Ce guide est écrit pour que <strong>toi et ton neveu puissiez le suivre ensemble</strong>. Les étapes de tous les jours (ajouter un article, voir une commande) sont pour toi. Les étapes un peu techniques (télécharger des fichiers, mettre le site en ligne, brancher une adresse internet) sont marquées avec cette étiquette bleue : il pourra les faire en une après-midi.</p>
+        <p>Pas besoin d'être développeur. Il faut juste savoir télécharger un fichier, créer un compte sur un site et suivre des étapes dans l'ordre.</p>
+      </div>
+      <p>Chaque étape a une case <span class="click">Fait</span> à cocher. Ta progression reste enregistrée sur cet appareil, tu peux fermer la page et revenir plus tard.</p>
+      <p>Les mots entre crochets gris, comme <span class="click">Enregistrer</span>, sont les boutons sur lesquels il faut cliquer.</p>
+    </section>
+
+    <!-- 2 -->
+    <section id="prepare">
+      <span class="kicker">Ce que tu as entre les mains</span>
+      <h2>Ce qu'on a préparé pour toi</h2>
+      <div class="cards">
+        <div class="card">
+          <div class="ico">🖥️</div>
+          <h4>Le site de démonstration</h4>
+          <p>Ton site complet aux couleurs de SGDD, avec tes photos Facebook, 24 articles, le panier et un espace gérant de démonstration.</p>
+          <a class="btn" href="https://unkill.si/sgdd" target="_blank" rel="noopener">Voir la démo</a>
+        </div>
+        <div class="card">
+          <div class="ico">🛍️</div>
+          <h4>La boutique Shopify</h4>
+          <p>Une vraie boutique, déjà remplie : articles, photos, rayons, livraison, retrait place de Verdun, commande sans paiement en ligne.</p>
+          <a class="btn alt" href="https://hg07pk-ew.myshopify.com" target="_blank" rel="noopener">Voir la boutique</a>
+        </div>
+        <div class="card">
+          <div class="ico">📦</div>
+          <h4>Les fichiers</h4>
+          <p>Tout le code du site, le thème Shopify (fichier .zip) et la liste des articles, à télécharger sur GitHub.</p>
+          <a class="btn alt" href="https://github.com/go-silex/extern-client-sgdd-le-shop" target="_blank" rel="noopener">Ouvrir GitHub</a>
+        </div>
+      </div>
+      <div class="box warn">
+        <h4>À savoir tout de suite</h4>
+        <ul>
+          <li><strong>Les prix sont à vérifier.</strong> Seul le prix des hoodies (59 €) vient d'une étiquette de la boutique. Les autres prix ont été mis au jugé : corrige-les avant d'ouvrir.</li>
+          <li><strong>Les stocks sont fictifs.</strong> Il faudra compter ce que tu as vraiment, par taille et par couleur.</li>
+          <li><strong>La boutique Shopify est fermée au public</strong> (protégée par un mot de passe) tant que tu n'as pas décidé de l'ouvrir.</li>
+          <li><strong>Personne ne paie en ligne.</strong> Le client valide sa commande, tu la reçois par email, tu le rappelles, il règle en boutique ou par virement.</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- 3 -->
+    <section id="mots">
+      <span class="kicker">Sans jargon</span>
+      <h2>Les mots à connaître</h2>
+      <table>
+        <tr><th>Mot</th><th>Ce que ça veut dire</th></tr>
+        <tr><td>Site internet</td><td>Les pages que tes clients voient sur leur téléphone ou leur ordinateur.</td></tr>
+        <tr><td>Hébergement</td><td>L'ordinateur, allumé jour et nuit chez une entreprise, qui garde ton site et l'envoie aux visiteurs. Comme un local commercial, mais pour le site.</td></tr>
+        <tr><td>Nom de domaine</td><td>L'adresse de ton site, par exemple <code>sgdd-leshop.fr</code>. On la loue à l'année, environ 10 à 20 € par an.</td></tr>
+        <tr><td>Back-office</td><td>L'arrière-boutique du site : là où tu changes un prix, ajoutes une photo, vois les commandes. Les clients ne le voient jamais.</td></tr>
+        <tr><td>Shopify</td><td>Une entreprise qui fournit tout d'un coup : le site, l'hébergement, le back-office, l'appli sur ton téléphone. Tu paies un abonnement mensuel.</td></tr>
+        <tr><td>Thème</td><td>L'habillage du site : couleurs, logo, mise en page. On a fabriqué un thème SGDD pour Shopify, c'est le fichier <code>.zip</code>.</td></tr>
+        <tr><td>Fichier .zip</td><td>Un dossier compressé en un seul fichier, pratique à envoyer. On ne l'ouvre pas : on le donne tel quel à Shopify.</td></tr>
+        <tr><td>Fichier .csv</td><td>Un tableau (comme Excel) avec la liste des articles, leurs prix et leurs stocks. Shopify sait le lire.</td></tr>
+        <tr><td>GitHub</td><td>Un site où l'on range le code d'un site internet. On s'en sert ici pour te donner tous les fichiers en un seul lien.</td></tr>
+        <tr><td>Click &amp; collect</td><td>Le client commande sur le site et vient chercher son article à la boutique.</td></tr>
+      </table>
+    </section>
+
+    <!-- 4 -->
+    <section id="choix">
+      <span class="kicker">Le choix à faire</span>
+      <h2>Shopify ou ton propre site ?</h2>
+      <p class="lead">Les deux affichent le même site aux couleurs SGDD. La différence, c'est ce qui se passe derrière : qui le garde en ligne, comment tu changes un prix, et combien ça coûte.</p>
+      <div class="compare">
+        <div class="option">
+          <header>
+            <div class="name">A. Shopify</div>
+            <div class="sub">La boutique déjà prête, avec une vraie arrière-boutique</div>
+            <span class="reco">Notre conseil pour toi</span>
+          </header>
+          <div class="body">
+            <h5>Les plus</h5>
+            <ul class="pros">
+              <li>Une vraie arrière-boutique : tu changes un prix, une photo, un stock en deux clics, même depuis ton téléphone (appli Shopify).</li>
+              <li>Les stocks baissent tout seuls à chaque commande.</li>
+              <li>La liste de toutes tes commandes, avec le client, l'adresse et le statut.</li>
+              <li>Les emails aux clients partent tout seuls (confirmation, commande prête).</li>
+              <li>Tu pourras activer le paiement par carte plus tard, en un clic, sans rien refaire.</li>
+              <li>Possible de vendre aussi depuis Facebook et Instagram, et d'encaisser en boutique avec le même stock.</li>
+              <li>Shopify s'occupe de la sécurité, des pannes et des mises à jour.</li>
+              <li>C'est déjà fait : la boutique est remplie et configurée.</li>
+            </ul>
+            <h5>Les moins</h5>
+            <ul class="cons">
+              <li>Un abonnement chaque mois (offre de lancement à 1 €/mois pendant 3 mois, puis le prix du forfait Basic).</li>
+              <li>Des frais sur chaque vente si tu actives un jour le paiement par carte.</li>
+              <li>Changer le design en profondeur demande quelqu'un qui connaît Shopify.</li>
+              <li>Tes données sont chez Shopify (tu peux les exporter quand tu veux).</li>
+            </ul>
+          </div>
+        </div>
+        <div class="option">
+          <header>
+            <div class="name">B. Ton propre site</div>
+            <div class="sub">Le site de la démo, hébergé gratuitement, commandes par email</div>
+            <span class="reco" style="background:#c9cfe6">Si ton neveu s'en occupe</span>
+          </header>
+          <div class="body">
+            <h5>Les plus</h5>
+            <ul class="pros">
+              <li>Presque gratuit : seul le nom de domaine se paie (10 à 20 € par an).</li>
+              <li>Aucun abonnement, aucun frais sur les ventes.</li>
+              <li>Le site t'appartient entièrement, design 100 % SGDD.</li>
+              <li>Très rapide et très simple techniquement : pas de base de données, rien à mettre à jour.</li>
+              <li>Chaque commande arrive par email, bien présentée.</li>
+            </ul>
+            <h5>Les moins</h5>
+            <ul class="cons">
+              <li><strong>Pas de vraie arrière-boutique.</strong> L'espace gérant de la démo est une démonstration : il ne marche pas en vrai. Pour changer un prix ou un stock, il faut modifier un fichier et remettre le site en ligne (ton neveu, 5 minutes).</li>
+              <li>Les stocks ne baissent pas tout seuls : tu notes toi-même ce qui est vendu.</li>
+              <li>Pas de liste des commandes : seulement tes emails.</li>
+              <li>Le paiement par carte n'est pas prévu (il faudrait faire développer cette partie).</li>
+              <li>Si quelque chose casse, c'est à ton neveu (ou à un développeur) de réparer.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <table>
+        <tr><th>En résumé</th><th>A. Shopify</th><th>B. Ton propre site</th></tr>
+        <tr><td>Coût</td><td>Abonnement mensuel + nom de domaine</td><td>Nom de domaine seulement</td></tr>
+        <tr><td>Temps pour ouvrir</td><td>1 à 2 heures (c'est déjà rempli)</td><td>Une après-midi avec ton neveu</td></tr>
+        <tr><td>Changer un prix</td><td>Toi, sur ton téléphone, en 1 minute</td><td>Ton neveu, en modifiant un fichier</td></tr>
+        <tr><td>Stocks</td><td>Automatiques</td><td>À suivre toi-même</td></tr>
+        <tr><td>Commandes</td><td>Liste complète + email</td><td>Email uniquement</td></tr>
+        <tr><td>Paiement en ligne plus tard</td><td>Oui, en un clic</td><td>Non, sauf développement</td></tr>
+        <tr><td>Qui répare si ça casse</td><td>Shopify</td><td>Ton neveu ou un développeur</td></tr>
+      </table>
+      <div class="box ok">
+        <h4>Notre conseil</h4>
+        <p><strong>Prends Shopify</strong> si tu veux gérer ta boutique en ligne toi-même, au quotidien, depuis ton téléphone. C'est le chemin le plus simple pour un commerçant.</p>
+        <p><strong>Prends ton propre site</strong> si tu veux surtout une vitrine en ligne avec quelques commandes par email, sans abonnement, et que ton neveu est d'accord pour faire les mises à jour.</p>
+        <p>Rien n'est définitif : tu peux commencer par l'un et passer à l'autre plus tard, le design SGDD existe dans les deux.</p>
+      </div>
+    </section>
+
+    <!-- 5 -->
+    <section id="avant">
+      <span class="kicker">Préparer ses affaires</span>
+      <h2>À réunir avant de commencer</h2>
+      <p>Valable pour les deux chemins. Prépare ça sur une feuille ou dans une note, ça ira beaucoup plus vite.</p>
+      <ol class="steps" data-group="avant">
+        <li><span class="step-title">Une adresse email pour la boutique</span>Celle où tu veux recevoir les commandes. Une adresse que tu consultes tous les jours.</li>
+        <li><span class="step-title">Tes prix définitifs</span>Ouvre la <a href="https://unkill.si/sgdd" target="_blank" rel="noopener">démo</a>, passe article par article et note les bons prix.</li>
+        <li><span class="step-title">Ton stock réel</span>Pour chaque article : combien en taille S, M, L... et dans quelle couleur.</li>
+        <li><span class="step-title">Tes photos</span>Les photos actuelles viennent de Facebook (petite taille). Si tu peux, prends chaque article en photo sur un fond clair, à la lumière du jour, avec ton téléphone.</li>
+        <li><span class="step-title">Les infos de ton entreprise</span>Nom de la société, forme (EI, SARL, SAS...), numéro SIRET, ville du RCS, numéro de TVA s'il y en a un. Elles servent pour les mentions légales (obligatoires).</li>
+        <li><span class="step-title">Ta situation de TVA</span>Demande à ton comptable si tu factures la TVA (20 %) ou si tu es en « franchise en base de TVA ». Ça change ce qu'on règle dans le site.</li>
+      </ol>
+    </section>
+
+    <!-- 6 SHOPIFY -->
+    <section id="shopify">
+      <span class="kicker">Chemin A</span>
+      <h2>Mettre la boutique en ligne avec Shopify</h2>
+      <p class="lead">Deux façons de faire. La plus simple : <strong>récupérer la boutique déjà prête</strong> que Pierre a montée. Sinon, tu peux repartir de zéro avec les fichiers fournis.</p>
+
+      <h3 id="a-recuperer">A1. Récupérer la boutique déjà prête <span class="time">(30 minutes, recommandé)</span></h3>
+      <p>La boutique existe déjà à l'adresse <code>hg07pk-ew.myshopify.com</code>. Elle est au nom de Pierre pour l'instant. Shopify permet de la transférer : elle devient la tienne, avec tout ce qu'il y a dedans.</p>
+      <ol class="steps" data-group="a1">
+        <li><span class="step-title">Dis à Pierre quelle adresse email utiliser</span>Ce sera ton identifiant Shopify. Pierre t'ajoute comme membre de la boutique et tu reçois une invitation par email.</li>
+        <li><span class="step-title">Accepte l'invitation</span>
+          <ol>
+            <li>Ouvre l'email de Shopify et clique sur <span class="click">Accepter l'invitation</span>.</li>
+            <li>Crée ton mot de passe. Note-le dans un endroit sûr.</li>
+            <li>Shopify peut te demander un code reçu par SMS ou par email : c'est normal, c'est pour la sécurité.</li>
+          </ol>
+        </li>
+        <li><span class="step-title">Pierre te transfère la propriété</span>Il passe par <span class="click">Paramètres</span> &gt; <span class="click">Utilisateurs</span> &gt; <span class="click">Transférer la propriété</span>. Tu deviens propriétaire de la boutique.</li>
+        <li><span class="step-title">Choisis ton forfait</span>
+          <ol>
+            <li>Va sur <a href="https://admin.shopify.com" target="_blank" rel="noopener">admin.shopify.com</a> et connecte-toi.</li>
+            <li>En bas à gauche, clique sur <span class="click">S'abonner</span> (ou <span class="click">Sélectionner un forfait</span>).</li>
+            <li>Choisis le forfait <strong>Basic</strong>. C'est largement suffisant pour une boutique comme la tienne.</li>
+            <li>Entre ta carte bancaire pour l'abonnement (c'est ce qui paie Shopify, pas tes clients).</li>
+          </ol>
+          <div class="box warn" style="margin-top:10px"><p>Sans forfait, Shopify refuse toute commande et la boutique ne peut pas s'ouvrir au public.</p></div>
+        </li>
+        <li><span class="step-title">Change l'email de réception des commandes</span>
+          <ol>
+            <li><span class="click">Paramètres</span> (en bas à gauche) &gt; <span class="click">Général</span> &gt; <span class="click">Coordonnées de la boutique</span>.</li>
+            <li>Mets ton adresse email dans <strong>E-mail de la boutique</strong>, puis <span class="click">Enregistrer</span>.</li>
+            <li>Puis <span class="click">Paramètres</span> &gt; <span class="click">Notifications</span> &gt; <span class="click">Notifications des collaborateurs</span> : vérifie que ton email reçoit bien les nouvelles commandes.</li>
+          </ol>
+        </li>
+        <li><span class="step-title">Installe l'appli Shopify sur ton téléphone</span>Cherche « Shopify » dans l'App Store ou le Play Store, connecte-toi. Tu verras chaque commande arriver en notification.</li>
+      </ol>
+      <p>Ensuite, passe directement à <a href="#a-produits">A3. Gérer les articles</a>.</p>
+
+      <h3 id="a-zero">A2. Ou partir de zéro avec les fichiers <span class="time">(1 à 2 heures)</span></h3>
+      <div class="box nephew"><span class="tag">Pour ton neveu</span><p>À faire seulement si tu ne récupères pas la boutique de Pierre. Les fichiers sont sur la page GitHub, rubrique <strong>Releases</strong> (« versions »).</p>
+        <a class="btn" href="https://github.com/go-silex/extern-client-sgdd-le-shop/releases/latest" target="_blank" rel="noopener">Télécharger le thème et la liste d'articles</a></div>
+      <ol class="steps" data-group="a2">
+        <li><span class="step-title">Télécharge les deux fichiers</span>Sur la page ouverte par le bouton ci-dessus, dans <strong>Assets</strong>, clique sur :
+          <ul><li><code>sgdd-le-shop-theme-v3.zip</code> : le thème (l'habillage SGDD).</li><li><code>produits-shopify.csv</code> : la liste des 24 articles avec photos, tailles, couleurs, prix et stocks.</li></ul>
+          Ils arrivent dans ton dossier « Téléchargements ». <strong>N'ouvre pas le .zip</strong>, il faut le donner tel quel à Shopify.</li>
+        <li><span class="step-title">Crée ton compte Shopify</span>Va sur <a href="https://www.shopify.com/fr" target="_blank" rel="noopener">shopify.com/fr</a>, clique sur <span class="click">Commencer l'essai gratuit</span>, suis les questions (tu peux passer celles qui ne te concernent pas). Choisis ensuite le forfait Basic.</li>
+        <li><span class="step-title">Installe le thème SGDD</span>
+          <ol><li>À gauche : <span class="click">Boutique en ligne</span> &gt; <span class="click">Thèmes</span>.</li><li>Dans « Brouillons de thèmes », clique sur <span class="click">Importer</span> &gt; <span class="click">Importer un fichier zip</span>.</li><li>Choisis <code>sgdd-le-shop-theme-v3.zip</code> et attends la fin.</li><li>Sur la ligne du thème : <span class="click">Publier</span>.</li></ol></li>
+        <li><span class="step-title">Importe les articles</span>
+          <ol><li>À gauche : <span class="click">Produits</span> &gt; <span class="click">Importer</span>.</li><li><span class="click">Charger un fichier</span>, choisis <code>produits-shopify.csv</code>.</li><li>Vérifie l'aperçu (24 produits, 132 variantes), puis <span class="click">Importer des produits</span>. Les photos se téléchargent toutes seules.</li></ol></li>
+        <li><span class="step-title">Crée les 5 rayons (collections)</span>
+          <p><span class="click">Produits</span> &gt; <span class="click">Collections</span> &gt; <span class="click">Ajouter une collection</span>. Pour chacune : un titre, puis <span class="click">Ajouter une condition</span> &gt; <strong>Balise</strong> &gt; la balise indiquée. Les articles se rangent tout seuls.</p>
+          <ul><li>« Collection SGDD » : balise <code>Collection SGDD</code></li><li>« SGDD Kids » : balise <code>Kids</code></li><li>« Jay'M Riding » : balise <code>Jay'M Riding</code></li><li>« Surf &amp; Skate » : balise <code>Surf &amp; Skate</code></li><li>« Déco &amp; vintage US » : balise <code>Vintage US</code></li></ul></li>
+        <li><span class="step-title">Crée la carte cadeau</span><span class="click">Produits</span> &gt; <span class="click">Cartes-cadeaux</span> &gt; <span class="click">Ajouter un produit carte-cadeau</span>. Titre « Carte cadeau SGDD Le Shop », montants 25, 50 et 100 €.</li>
+        <li><span class="step-title">Crée les pages</span><span class="click">Boutique en ligne</span> &gt; <span class="click">Pages</span> &gt; <span class="click">Ajouter une page</span>. Le texte de chaque page est dans le dossier <code>shopify/pages</code> du code :
+          <ul><li>« La boutique » : choisir le modèle <strong>boutique</strong> en bas à droite.</li><li>« Contact » : modèle <strong>contact</strong> (le formulaire apparaît tout seul).</li><li>« Livraison &amp; retours » : modèle par défaut.</li><li>« Mentions légales » : voir la partie <a href="#legal">obligations légales</a>.</li></ul></li>
+        <li><span class="step-title">Crée les menus</span><span class="click">Contenu</span> &gt; <span class="click">Menus</span>.
+          <ul><li><strong>Menu principal</strong> : Tout le shop, les 5 rayons, La boutique.</li><li><strong>Menu du pied de page</strong> (renomme-le « Infos ») : Rechercher, Livraison &amp; retours, Contact, Mentions légales.</li></ul></li>
+        <li><span class="step-title">Règle la livraison et le retrait</span>
+          <ol><li><span class="click">Paramètres</span> &gt; <span class="click">Expédition et livraison</span> &gt; la ligne « France ».</li><li>Modifie le tarif : nom « Colissimo à domicile », prix 5,90 €, livraison gratuite à partir de 80 €. Désactive les autres tarifs.</li><li><span class="click">Paramètres</span> &gt; <span class="click">Emplacements</span> : mets l'adresse 7 place de Verdun, 17110 Saint-Georges-de-Didonne.</li><li>Dans le même écran, <span class="click">Retrait en magasin</span> : active-le, « Généralement prêt en 24 heures ».</li></ol></li>
+        <li><span class="step-title">Règle la commande sans paiement en ligne</span>
+          <ol><li><span class="click">Paramètres</span> &gt; <span class="click">Paiements</span>. <strong>N'active pas Shopify Payments.</strong></li><li><span class="click">Moyens de paiement manuels</span> &gt; <span class="click">Moyen de paiement</span> &gt; <span class="click">Nouveau moyen de paiement personnalisé</span>.</li><li>Nom : « Règlement au retrait ou après confirmation ». Les textes à copier sont dans le fichier <code>shopify/textes-shopify.md</code>.</li></ol></li>
+        <li><span class="step-title">Relie les rayons à la page d'accueil</span><span class="click">Boutique en ligne</span> &gt; <span class="click">Personnaliser</span>. Section <strong>Rayons</strong> : <span class="click">Ajouter Rayon</span> 5 fois et choisis une collection à chaque fois. Section <strong>Sélection d'articles</strong> : choisis « Collection SGDD ». <span class="click">Enregistrer</span>.</li>
+      </ol>
+
+      <h3 id="a-produits">A3. Gérer tes articles au quotidien</h3>
+      <p>Tout se fait dans <a href="https://admin.shopify.com" target="_blank" rel="noopener">admin.shopify.com</a> ou dans l'appli Shopify, rubrique <span class="click">Produits</span>.</p>
+      <ol class="steps" data-group="a3">
+        <li><span class="step-title">Changer un prix</span>Clique sur l'article. Si l'article a des tailles ou des couleurs, clique sur la variante (par exemple « Rose / M ») ; sinon le prix est directement dans la fiche. Change le <strong>Prix</strong>, puis <span class="click">Enregistrer</span>. Astuce : pour changer le prix de toutes les tailles d'un coup, coche-les toutes dans la liste des variantes, puis <span class="click">Modifier les prix</span>.</li>
+        <li><span class="step-title">Mettre à jour le stock</span><span class="click">Produits</span> &gt; <span class="click">Stock</span> : la liste de tout ce que tu as, taille par taille. Tape le nouveau chiffre et <span class="click">Enregistrer</span>. Quand une taille tombe à 0, elle s'affiche « Épuisé » sur le site.</li>
+        <li><span class="step-title">Changer une photo</span>Dans la fiche de l'article, zone <strong>Supports multimédias</strong> : glisse ta nouvelle photo ou clique sur <span class="click">Importer</span>. La première photo est celle qui s'affiche sur le site : fais-la glisser en premier.</li>
+        <li><span class="step-title">Ajouter un nouvel article</span><span class="click">Produits</span> &gt; <span class="click">Ajouter un produit</span>. Remplis le titre, la description, les photos, le prix. Pour les tailles et couleurs : <span class="click">Ajouter des options comme la taille ou la couleur</span>. <strong>Important</strong> : dans <strong>Balises</strong>, mets le nom du rayon (par exemple <code>Collection SGDD</code>) pour qu'il apparaisse au bon endroit.</li>
+        <li><span class="step-title">Afficher « Nouveau » ou « Best-seller » sur un article</span>Ajoute la balise <code>badge:Nouveau</code> (ou <code>badge:Best-seller</code>) dans la fiche de l'article. Pour l'enlever, supprime la balise.</li>
+        <li><span class="step-title">Cacher un article sans le supprimer</span>Dans la fiche, en haut à droite, <strong>Statut</strong> : passe de « Actif » à « Brouillon ». Il disparaît du site, tu le remets quand tu veux.</li>
+        <li><span class="step-title">Changer les textes du site</span><span class="click">Boutique en ligne</span> &gt; <span class="click">Personnaliser</span>. Clique sur une partie du site (le grand titre, le bandeau du haut, l'histoire, les horaires...), le texte se modifie à gauche. <span class="click">Enregistrer</span> en haut à droite.</li>
+      </ol>
+
+      <h3 id="a-commandes">A4. Gérer les commandes</h3>
+      <p>Voici ce qui se passe quand un client commande :</p>
+      <ol class="steps" data-group="a4">
+        <li><span class="step-title">Tu reçois un email et une notification</span>« Nouvelle commande » avec le nom du client, les articles, et s'il vient chercher en boutique ou s'il veut un envoi Colissimo. Le stock a déjà baissé tout seul.</li>
+        <li><span class="step-title">Tu rappelles le client sous 24 heures</span>Son téléphone et son email sont dans la commande (<span class="click">Commandes</span> &gt; clique sur la commande). Tu confirmes la disponibilité et le règlement : en boutique au retrait, ou par virement avant un envoi.</li>
+        <li><span class="step-title">Le client a payé : marque la commande « payée »</span>Dans la commande, <span class="click">Marquer comme payée</span>. Ça t'aide à t'y retrouver et ça alimente tes statistiques.</li>
+        <li><span class="step-title">Retrait en boutique</span>Quand c'est prêt : <span class="click">Marquer comme prêt pour le retrait</span>. Le client reçoit un email automatique. Quand il passe la chercher : <span class="click">Marquer comme récupéré</span>.</li>
+        <li><span class="step-title">Envoi Colissimo</span>Une fois le colis posté : <span class="click">Traiter les articles</span>, colle le numéro de suivi La Poste, <span class="click">Traiter</span>. Le client reçoit son lien de suivi par email.</li>
+        <li><span class="step-title">Annuler une commande</span>Dans la commande : <span class="click">Plus d'actions</span> &gt; <span class="click">Annuler la commande</span>. Remets les articles en stock si Shopify te le propose.</li>
+      </ol>
+
+      <h3 id="a-ouvrir">A5. Ouvrir la boutique au public</h3>
+      <ol class="steps" data-group="a5">
+        <li><span class="step-title">Fais une commande test toi-même</span>Sur ta boutique, commande un article en retrait en boutique, avec ton propre email. Vérifie que tu reçois bien la commande et que le client (toi) reçoit sa confirmation. Puis annule-la.</li>
+        <li><span class="step-title">Vérifie les obligations légales</span>Voir la partie <a href="#legal">obligations légales</a> : mentions légales, conditions de vente, TVA.</li>
+        <li><span class="step-title">Enlève le mot de passe</span><span class="click">Boutique en ligne</span> &gt; <span class="click">Préférences</span> &gt; <strong>Accès à la boutique</strong> : désactive <strong>Mode privé</strong>, puis <span class="click">Enregistrer</span>. La boutique est ouverte à tous.</li>
+        <li><span class="step-title">Branche ton adresse internet</span>Voir la partie <a href="#domaine">ton adresse internet</a>.</li>
+        <li><span class="step-title">Fais-le savoir</span>Mets le lien sur ta page Facebook (bouton « Acheter »), sur ta vitrine (un QR code imprimé), sur tes sacs. Facultatif : <span class="click">Canaux de vente</span> &gt; ajoute <strong>Facebook &amp; Instagram</strong> pour que tes articles apparaissent directement sur ta page.</li>
+      </ol>
+    </section>
+
+    <!-- 7 OWN SITE -->
+    <section id="site">
+      <span class="kicker">Chemin B</span>
+      <h2>Mettre ton propre site en ligne</h2>
+      <p class="lead">C'est le site de la démo, en vrai. Les clients commandent, chaque commande t'arrive par email. Comptez une après-midi avec ton neveu.</p>
+      <div class="box nephew"><span class="tag">Pour ton neveu</span>
+        <p>Le site est fait de fichiers simples (HTML, CSS, JavaScript). Pas de base de données, pas de serveur à installer, pas de commande à taper. Tu modifies des fichiers texte avec n'importe quel éditeur (par exemple <a href="https://code.visualstudio.com" target="_blank" rel="noopener">Visual Studio Code</a>, gratuit) et tu les envoies sur un hébergeur gratuit.</p>
+        <p>Le code complet est ici : <a href="https://github.com/go-silex/extern-client-sgdd-le-shop" target="_blank" rel="noopener">github.com/go-silex/extern-client-sgdd-le-shop</a>.</p>
+      </div>
+
+      <h3 id="b-telecharger">B1. Télécharger le site <span class="time">(5 minutes)</span></h3>
+      <ol class="steps" data-group="b1">
+        <li><span class="step-title">Télécharge le code</span>Clique ici : <a class="btn" href="https://github.com/go-silex/extern-client-sgdd-le-shop/archive/refs/heads/main.zip">Télécharger le site (.zip)</a><br>Ou sur la page GitHub : bouton vert <span class="click">Code</span> &gt; <span class="click">Download ZIP</span>.</li>
+        <li><span class="step-title">Décompresse-le</span>Double-clique sur le fichier téléchargé. Un dossier <code>extern-client-sgdd-le-shop-main</code> apparaît. C'est ton site. Range-le dans un endroit facile à retrouver (le Bureau par exemple).</li>
+        <li><span class="step-title">Ouvre le site sur ton ordinateur</span>Dans le dossier, double-clique sur <code>index.html</code>. Le site s'ouvre dans ton navigateur. Les pages et le panier fonctionnent, c'est parfait pour vérifier tes modifications avant de les mettre en ligne.</li>
+      </ol>
+      <p>Ce qu'il y a dans le dossier :</p>
+      <div class="files">
+        <div><code>config.js</code><span><strong>Les réglages.</strong> Mode démo ou vrai site, adresse qui reçoit les commandes, frais de livraison. C'est le fichier à modifier en premier.</span></div>
+        <div><code>products.js</code><span><strong>Le catalogue.</strong> Tous les articles : nom, prix, stock, photos, couleurs, tailles, description.</span></div>
+        <div><code>assets/photos/</code><span><strong>Les photos.</strong> Les photos de la boutique et des articles. Ajoute tes nouvelles photos ici.</span></div>
+        <div><code>index.html</code><span>La page du site (en-tête, pied de page). Rarement à toucher.</span></div>
+        <div><code>styles.css</code><span>Le design (couleurs, polices, mise en page). Rarement à toucher.</span></div>
+        <div><code>app.js</code><span>Le fonctionnement (pages, panier, commande). À ne pas toucher sauf si tu sais coder.</span></div>
+        <div><code>admin.js</code><span>L'espace gérant de démonstration. Il est automatiquement désactivé en mode vrai site.</span></div>
+        <div><code>guide.html</code><span>Ce guide.</span></div>
+        <div><code>shopify/</code><span>Tout ce qui concerne Shopify (thème, liste d'articles, textes). Inutile pour le chemin B.</span></div>
+        <div><code>scripts/smoke.mjs</code><span>Un contrôle automatique facultatif (vérifie qu'aucune photo ne manque). Nécessite Node.js : <code>node scripts/smoke.mjs</code>.</span></div>
+      </div>
+
+      <h3 id="b-modifier">B2. Mettre tes vraies infos <span class="time">(1 heure)</span></h3>
+      <ol class="steps" data-group="b2">
+        <li><span class="step-title">Corrige les prix et les stocks</span>Ouvre <code>products.js</code> avec l'éditeur. Chaque article ressemble à ça :
+<pre><code>{
+  id: 'hoodie-phare-chopper', cat: 'sgdd', type: 'Hoodie',
+  name: 'Hoodie Phare &amp; Chopper',
+  price: 59, priceConfirmed: true, badge: 'Best-seller', stock: 24,
+  imgs: [F + 'hoodie-rose.jpg', P + 'crop-hoodie-creme.jpg'],
+  colors: [{ name: 'Rose', hex: '#f3c6cf' }, { name: 'Crème', hex: '#efe6d2' }],
+  sizes: SIZES,
+  desc: "Le chopper passe devant le phare...",
+  details: ['Impression dos + poitrine', 'Molleton épais', 'Coupe unisexe']
+},</code></pre>
+          <ul>
+            <li><code>price</code> : le prix en euros (un point pour les centimes : <code>29.5</code>).</li>
+            <li><code>stock</code> : le nombre total en stock. À 0, l'article s'affiche « Épuisé ».</li>
+            <li><code>badge</code> : le petit mot jaune (« Nouveau », « Best-seller ») ou <code>''</code> pour rien.</li>
+            <li><code>cat</code> : le rayon : <code>sgdd</code>, <code>kids</code>, <code>jaym</code>, <code>surf-skate</code> ou <code>vintage</code>.</li>
+            <li><code>sizes</code> : <code>SIZES</code> (XS à XXL), <code>KIDS</code> (4 à 12 ans) ou une liste, par exemple <code>['Unique']</code>.</li>
+            <li>Garde bien les virgules, les guillemets et les accolades : une seule oubliée et le site ne s'affiche plus. En cas de doute, ouvre <code>index.html</code> pour vérifier.</li>
+          </ul></li>
+        <li><span class="step-title">Change une photo</span>Copie ta photo dans <code>assets/photos/</code> (nom sans espace ni accent, par exemple <code>hoodie-noir.jpg</code>), puis dans <code>products.js</code> remplace le nom dans <code>imgs</code>. La première photo de la liste est la principale. Une photo carrée ou en hauteur, de 800 à 1200 pixels de large, est idéale.</li>
+        <li><span class="step-title">Ajoute un article</span>Copie un bloc d'article entier (de <code>{</code> à <code>},</code>), colle-le juste en dessous et change chaque valeur. L'<code>id</code> doit être unique, en minuscules, sans espace (il sert d'adresse : <code>#/p/mon-article</code>).</li>
+        <li><span class="step-title">Règle la livraison</span>Dans <code>config.js</code>, partie <code>settings</code> : <code>freeShip</code> (livraison offerte dès...), <code>shipCost</code> (frais Colissimo), <code>collect</code> (<code>true</code> pour proposer le retrait), <code>hours</code> (horaires affichés).</li>
+      </ol>
+
+      <h3 id="b-commandes">B3. Recevoir les commandes par email <span class="time">(15 minutes)</span></h3>
+      <p>Un site simple ne sait pas envoyer d'email tout seul. On utilise un service gratuit, <strong>Formspree</strong>, qui transforme chaque commande en email. L'offre gratuite limite le nombre d'emails par mois : vérifie la limite sur leur site, et passe à l'offre payante si tu as beaucoup de commandes.</p>
+      <ol class="steps" data-group="b3">
+        <li><span class="step-title">Crée un compte Formspree</span>Va sur <a href="https://formspree.io" target="_blank" rel="noopener">formspree.io</a>, <span class="click">Get Started</span>, inscris-toi avec <strong>l'email de la boutique</strong> (c'est là que les commandes arriveront). Confirme ton email.</li>
+        <li><span class="step-title">Crée un formulaire</span><span class="click">+ New Form</span>, nom « Commandes SGDD », email de réception : l'email de la boutique. Valide.</li>
+        <li><span class="step-title">Copie l'adresse du formulaire</span>Formspree affiche une adresse du type <code>https://formspree.io/f/abcdwxyz</code>. Copie-la.</li>
+        <li><span class="step-title">Colle-la dans config.js</span>
+<pre><code>mode: 'live',
+orderEndpoint: 'https://formspree.io/f/abcdwxyz',</code></pre>
+          Passe <code>mode</code> de <code>'demo'</code> à <code>'live'</code> : l'espace gérant de démonstration et la mention « Site de démonstration » disparaissent, et les commandes partent pour de vrai.</li>
+        <li><span class="step-title">À quoi ressemble l'email reçu</span>Objet : « Nouvelle commande SGDD-261109-1430 : 33,90 € (Colissimo) ». Dedans : nom, email et téléphone du client, retrait ou adresse de livraison, la liste des articles avec taille et couleur, le total et son message. Tu peux répondre directement à l'email, ça part chez le client.</li>
+      </ol>
+
+      <h3 id="b-enligne">B4. Mettre le site en ligne <span class="time">(15 minutes)</span></h3>
+      <p>On utilise <strong>Netlify</strong>, gratuit pour un site comme le tien. Il suffit de glisser le dossier.</p>
+      <ol class="steps" data-group="b4">
+        <li><span class="step-title">Crée un compte Netlify</span>Va sur <a href="https://app.netlify.com/signup" target="_blank" rel="noopener">netlify.com</a> et inscris-toi avec ton email.</li>
+        <li><span class="step-title">Glisse le dossier du site</span>Va sur <a href="https://app.netlify.com/drop" target="_blank" rel="noopener">app.netlify.com/drop</a> et fais glisser <strong>tout le dossier</strong> du site dans la zone prévue. En quelques secondes, ton site est en ligne à une adresse du type <code>nom-au-hasard.netlify.app</code>.</li>
+        <li><span class="step-title">Donne-lui un nom</span><span class="click">Site configuration</span> &gt; <span class="click">Change site name</span> : par exemple <code>sgdd-leshop</code>. L'adresse devient <code>sgdd-leshop.netlify.app</code>.</li>
+        <li><span class="step-title">Fais une commande test</span>Sur le site en ligne, commande un article avec ton email. La première fois, Formspree peut te demander de confirmer ton formulaire par email : clique sur le lien. Vérifie que la commande arrive bien.</li>
+        <li><span class="step-title">Pour mettre à jour le site plus tard</span>Modifie les fichiers sur ton ordinateur, vérifie avec <code>index.html</code>, puis dans Netlify : <span class="click">Deploys</span> et glisse à nouveau le dossier entier. L'ancienne version est remplacée en quelques secondes.</li>
+      </ol>
+      <details>
+        <summary>Autres hébergeurs gratuits possibles</summary>
+        <p><strong>Cloudflare Pages</strong> (même principe : glisser le dossier) ou <strong>GitHub Pages</strong> (si ton neveu met le code dans son propre compte GitHub). Tous conviennent : le site n'a besoin que d'un hébergement de fichiers.</p>
+      </details>
+
+      <h3 id="b-quotidien">B5. Au quotidien avec ton propre site</h3>
+      <ol class="steps" data-group="b5">
+        <li><span class="step-title">Une commande arrive</span>Tu reçois l'email. Rappelle le client sous 24 heures pour confirmer et convenir du règlement (en boutique ou par virement).</li>
+        <li><span class="step-title">Note ce qui est vendu</span>Le site ne retire pas les articles vendus. Tiens un carnet ou un tableau. Quand une taille n'est plus disponible, préviens le client et demande à ton neveu de mettre le stock à 0.</li>
+        <li><span class="step-title">Une fois par semaine ou par mois</span>Envoie à ton neveu la liste des changements (prix, nouveaux articles, articles épuisés, photos). Il met à jour <code>products.js</code> et glisse le dossier sur Netlify.</li>
+      </ol>
+    </section>
+
+    <!-- 8 DOMAIN -->
+    <section id="domaine">
+      <span class="kicker">Les deux chemins</span>
+      <h2>Ton adresse internet (nom de domaine)</h2>
+      <p>Au lieu de <code>hg07pk-ew.myshopify.com</code> ou <code>sgdd-leshop.netlify.app</code>, tu peux avoir une vraie adresse comme <code>sgdd-leshop.fr</code>.</p>
+      <ol class="steps" data-group="dom">
+        <li><span class="step-title">Avec Shopify (le plus simple)</span><span class="click">Paramètres</span> &gt; <span class="click">Domaines</span> &gt; <span class="click">Acheter un domaine</span>. Tape le nom voulu, Shopify te dit s'il est libre, tu paies, c'est branché automatiquement. Rien d'autre à faire.</li>
+        <li><span class="step-title">Avec ton propre site</span><div class="box nephew" style="margin:8px 0"><span class="tag">Pour ton neveu</span><p>Dans Netlify : <span class="click">Domain management</span> &gt; <span class="click">Add a domain</span>. Netlify peut acheter le domaine pour toi et le brancher seul. Si le domaine est acheté ailleurs (OVH, Gandi...), Netlify indique les réglages DNS à recopier chez le vendeur du domaine. Le certificat de sécurité (le cadenas https) est installé automatiquement.</p></div></li>
+        <li><span class="step-title">Choisir le nom</span>Court, facile à dire au téléphone, sans accent. Idées : <code>sgdd-leshop.fr</code>, <code>sgddleshop.fr</code>, <code>sgdd-shop.fr</code>. Le <code>.fr</code> rassure une clientèle française.</li>
+      </ol>
+    </section>
+
+    <!-- 9 LEGAL -->
+    <section id="legal">
+      <span class="kicker">Obligatoire</span>
+      <h2>Les obligations légales</h2>
+      <p>Un site qui vend en ligne doit afficher certaines informations. Rien de compliqué, mais c'est obligatoire.</p>
+      <ol class="steps" data-group="legal">
+        <li><span class="step-title">Les mentions légales</span>Qui édite le site : nom de la société, forme, capital, adresse, SIRET, RCS, numéro de TVA, nom du responsable, email et téléphone, et l'hébergeur du site. Un modèle est prêt dans <code>shopify/pages/mentions-legales.html</code> : remplace les mots en MAJUSCULES. Sur Shopify, la page existe déjà, masquée : complète-la et passe-la en « Visible ».</li>
+        <li><span class="step-title">Les conditions générales de vente (CGV)</span>Prix, commande, retrait, livraison, retours, garanties. Sur Shopify : <span class="click">Paramètres</span> &gt; <span class="click">Politiques</span>, Shopify propose des modèles à adapter. Fais-les relire si tu peux.</li>
+        <li><span class="step-title">Le droit de rétractation</span>Pour une vente à distance, le client a 14 jours pour changer d'avis. Le site annonce 30 jours pour échanger : c'est plus généreux, donc conforme.</li>
+        <li><span class="step-title">Les données personnelles</span>Tu reçois nom, email, téléphone et adresse des clients. Utilise-les seulement pour leurs commandes (et la newsletter s'ils l'ont demandée). Une politique de confidentialité doit l'expliquer : Shopify en génère une.</li>
+        <li><span class="step-title">La TVA</span>Selon ce que dit ton comptable : prix TTC avec TVA à 20 %, ou mention « TVA non applicable, art. 293 B du CGI » si tu es en franchise. Sur Shopify : <span class="click">Paramètres</span> &gt; <span class="click">Taxes et droits de douane</span>.</li>
+      </ol>
+    </section>
+
+    <!-- 10 CHECKLIST -->
+    <section id="checklist">
+      <span class="kicker">Dernière vérification</span>
+      <h2>Avant d'ouvrir : la liste</h2>
+      <ol class="steps" data-group="check">
+        <li>Tous les prix sont les bons.</li>
+        <li>Les stocks correspondent à ce que tu as vraiment.</li>
+        <li>Les photos principales sont belles et nettes.</li>
+        <li>Les commandes arrivent sur ton email (commande test faite et reçue).</li>
+        <li>Le client reçoit sa confirmation (avec Shopify).</li>
+        <li>Les mentions légales sont complètes et visibles.</li>
+        <li>Les CGV et la politique de confidentialité sont en ligne.</li>
+        <li>La TVA est réglée selon ton comptable.</li>
+        <li>L'adresse, les horaires et le lien Facebook sont à jour.</li>
+        <li>Le site s'affiche bien sur un téléphone (teste sur le tien).</li>
+        <li>Le mot de passe est retiré (Shopify) ou le mode est sur <code>'live'</code> (ton site).</li>
+      </ol>
+    </section>
+
+    <!-- 11 FAQ -->
+    <section id="faq">
+      <span class="kicker">Les questions qu'on se pose</span>
+      <h2>Questions fréquentes</h2>
+      <details><summary>Est-ce que le client paie sur le site ?</summary><p>Non. Il valide sa commande sans payer. Tu le rappelles, et il règle en boutique ou par virement. Avec Shopify, tu pourras activer le paiement par carte plus tard (<span class="click">Paramètres</span> &gt; <span class="click">Paiements</span> &gt; Shopify Payments), il faudra alors ton IBAN, ton SIRET et une pièce d'identité.</p></details>
+      <details><summary>Et si je change d'avis entre Shopify et mon propre site ?</summary><p>C'est possible dans les deux sens : le design SGDD existe pour les deux, et la liste des articles aussi. Si tu quittes Shopify, exporte d'abord tes produits et tes commandes (<span class="click">Produits</span> &gt; <span class="click">Exporter</span>).</p></details>
+      <details><summary>L'espace gérant de la démo, je peux m'en servir ?</summary><p>Non, c'est une démonstration : ce que tu y changes reste dans ton navigateur et personne d'autre ne le voit. Pour gérer vraiment ta boutique, il faut Shopify (chemin A). Avec ton propre site, les changements se font dans les fichiers (chemin B).</p></details>
+      <details><summary>Combien de temps avant d'être en ligne ?</summary><p>Avec la boutique Shopify déjà prête : une à deux heures, le temps de corriger les prix et les stocks. Avec ton propre site : une après-midi avec ton neveu.</p></details>
+      <details><summary>Les photos viennent de ma page Facebook, c'est un problème ?</summary><p>Non, ce sont tes photos. Elles sont juste en petite taille (Facebook les réduit). Remplace-les progressivement par des photos prises avec ton téléphone : c'est ce qui fait vendre.</p></details>
+      <details><summary>Est-ce que je peux aussi vendre en boutique avec Shopify ?</summary><p>Oui, avec l'appli gratuite Shopify POS sur ton téléphone. Le stock est le même en ligne et en boutique : un hoodie vendu au comptoir disparaît du site.</p></details>
+      <details><summary>J'ai cassé quelque chose dans un fichier, comment revenir en arrière ?</summary><p>Retélécharge le site depuis GitHub (étape B1) et recopie seulement <code>config.js</code> et <code>products.js</code> que tu avais modifiés. Garde toujours une copie de ces deux fichiers.</p></details>
+      <details><summary>Qui contacter si je bloque ?</summary><p>Pierre, voir juste en dessous.</p></details>
+    </section>
+
+    <!-- 12 HELP -->
+    <section id="aide">
+      <span class="kicker">On reste là</span>
+      <h2>Besoin d'aide</h2>
+      <div class="box">
+        <p><strong>Pierre Paris</strong>, Unkillable Companies<br>Email : <a href="mailto:p@unkillablecompanies.com">p@unkillablecompanies.com</a></p>
+        <p>Les liens utiles :</p>
+        <ul>
+          <li>Le site de démonstration : <a href="https://unkill.si/sgdd" target="_blank" rel="noopener">unkill.si/sgdd</a></li>
+          <li>La boutique Shopify : <a href="https://hg07pk-ew.myshopify.com" target="_blank" rel="noopener">hg07pk-ew.myshopify.com</a></li>
+          <li>Le code et les fichiers : <a href="https://github.com/go-silex/extern-client-sgdd-le-shop" target="_blank" rel="noopener">github.com/go-silex/extern-client-sgdd-le-shop</a></li>
+          <li>Le thème Shopify et la liste d'articles : <a href="https://github.com/go-silex/extern-client-sgdd-le-shop/releases/latest" target="_blank" rel="noopener">page de téléchargement</a></li>
+        </ul>
+      </div>
+    </section>
+
+  </main>
+</div>
+
+<footer>
+  <div class="wrap">SGDD Le Shop · 7 place de Verdun, 17110 Saint-Georges-de-Didonne · Guide préparé par <a href="mailto:p@unkillablecompanies.com">Pierre Paris</a></div>
+</footer>
+
+<script>
+  // Checkboxes on every step, saved in this browser (works without storage too).
+  (function () {
+    var KEY = 'sgdd_guide_progress';
+    var state = {};
+    try { state = JSON.parse(localStorage.getItem(KEY) || '{}'); } catch (e) { state = {}; }
+    var items = [];
+    document.querySelectorAll('ol.steps').forEach(function (ol) {
+      var g = ol.getAttribute('data-group');
+      ol.querySelectorAll(':scope > li').forEach(function (li, i) {
+        var id = g + '-' + i;
+        var label = document.createElement('label');
+        label.className = 'check';
+        label.innerHTML = '<input type="checkbox" aria-label="Étape faite"> Fait';
+        var box = label.querySelector('input');
+        box.checked = !!state[id];
+        li.classList.toggle('done', box.checked);
+        box.addEventListener('change', function () {
+          state[id] = box.checked;
+          li.classList.toggle('done', box.checked);
+          try { localStorage.setItem(KEY, JSON.stringify(state)); } catch (e) {}
+          update();
+        });
+        li.appendChild(label);
+        items.push(box);
+      });
+    });
+    function update() {
+      var n = items.filter(function (b) { return b.checked; }).length;
+      document.getElementById('bar').style.width = Math.round(n / items.length * 100) + '%';
+      document.getElementById('barLabel').textContent = n + ' étape' + (n > 1 ? 's' : '') + ' cochée' + (n > 1 ? 's' : '') + ' sur ' + items.length;
+    }
+    update();
+  })();
+</script>
+</body>
+</html>

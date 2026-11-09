@@ -1,0 +1,10 @@
+{%- comment -%} Text logo (brand look) unless an image logo is set. Pass size: 'lg' for the big version. {%- endcomment -%}
+{%- if settings.logo -%}
+  <a href="{{ routes.root_url }}" class="logo logo-img" aria-label="{{ shop.name }}">
+    {{ settings.logo | image_url: width: 520 | image_tag: width: settings.logo_width, alt: shop.name, loading: 'eager' }}
+  </a>
+{%- else -%}
+  <a href="{{ routes.root_url }}" class="logo{% if size == 'lg' %} logo-lg{% endif %}" aria-label="{{ shop.name }}">
+    <span class="logo-sgdd">SGDD</span><span class="logo-shop">Le Shop</span>
+  </a>
+{%- endif -%}

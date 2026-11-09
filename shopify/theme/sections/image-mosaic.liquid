@@ -1,0 +1,27 @@
+{%- assign fallback = section.settings.fallback | split: ',' -%}
+<div class="wrap">
+  <div class="mosaic">
+    {%- if section.blocks.size > 0 -%}
+      {%- for block in section.blocks -%}
+        {%- if block.settings.image -%}{{ block.settings.image | image_url: width: 900 | image_tag: loading: 'lazy', class: block.settings.wide, alt: '' }}{%- endif -%}
+      {%- endfor -%}
+    {%- else -%}
+      {%- for name in fallback -%}
+        <img src="{{ name | strip | asset_url }}" alt="" loading="lazy" width="414" height="414"{% if forloop.first %} class="wide"{% endif %}>
+      {%- endfor -%}
+    {%- endif -%}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Mosaïque photos",
+  "settings": [
+    { "type": "text", "id": "fallback", "label": "Photos par défaut (fichiers du thème)", "default": "sgdd-boutique-plafond.jpg, sgdd-vitrine-ete.jpg, sgdd-coin-surf.jpg, sgdd-atelier.jpg, sgdd-portant-sweats.jpg, sgdd-mur-photos.jpg, sgdd-vitrine.jpg" }
+  ],
+  "blocks": [
+    { "type": "image", "name": "Photo", "settings": [ { "type": "image_picker", "id": "image", "label": "Photo" }, { "type": "select", "id": "wide", "label": "Taille", "options": [{ "value": "", "label": "Normale" }, { "value": "wide", "label": "Large" }], "default": "" } ] }
+  ],
+  "presets": [{ "name": "Mosaïque photos" }]
+}
+{% endschema %}

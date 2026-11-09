@@ -1,0 +1,49 @@
+<div class="wrap">
+  <div class="page-head"><div class="crumbs"><a href="{{ routes.root_url }}">Accueil</a> / Panier</div><h1 class="page-title">Votre panier</h1></div>
+  {%- if cart.item_count > 0 -%}
+    <form action="{{ routes.cart_url }}" method="post" class="checkout" id="cartForm">
+      <div class="panel">
+        {%- for item in cart.items -%}
+          <div class="line">
+            <div class="line-img">{%- if item.image -%}{{ item.image | image_url: width: 200 | image_tag: alt: '' }}{%- else -%}{% render 'giftcard-visual' %}{%- endif -%}</div>
+            <div>
+              <a class="line-name" href="{{ item.url }}">{{ item.product.title }}</a>
+              {%- unless item.product.has_only_default_variant -%}<div class="line-meta">{{ item.variant.title | replace: ' / ', ' · ' }}</div>{%- endunless -%}
+              <div class="qty"><input type="number" name="updates[]" value="{{ item.quantity }}" min="0" aria-label="Quantité {{ item.product.title | escape }}"></div>
+            </div>
+            <div class="line-right">
+              <strong>{{ item.final_line_price | money }}</strong>
+              <a class="remove" href="{{ item.url_to_remove }}">Retirer</a>
+            </div>
+          </div>
+        {%- endfor -%}
+        <button class="btn btn-secondary" type="submit" name="update" style="margin-top:16px">Mettre à jour</button>
+      </div>
+      <aside class="summary">
+        <div class="panel">
+          <h3>Récapitulatif</h3>
+          {%- assign threshold = settings.free_shipping_threshold | times: 100 -%}
+          {%- if cart.total_price < threshold -%}
+            {%- assign missing = threshold | minus: cart.total_price -%}
+            <p class="ship-progress">Plus que <b>{{ missing | money }}</b> pour la livraison offerte.</p>
+          {%- else -%}
+            <p class="ship-progress">Livraison offerte, c'est bon pour vous.</p>
+          {%- endif -%}
+          <div class="field">
+            <label for="CartNote">Un mot pour Marco (taille, retrait, question)</label>
+            <textarea id="CartNote" name="note" rows="3">{{ cart.note }}</textarea>
+          </div>
+          <div class="totals"><div class="grand"><span>Total TTC</span><span>{{ cart.total_price | money }}</span></div></div>
+          <button class="btn btn-primary btn-block" type="submit" name="checkout" style="margin-top:18px">Valider ma commande</button>
+          <p class="demo-note">{{ settings.order_note }}</p>
+        </div>
+      </aside>
+    </form>
+  {%- else -%}
+    <div class="thanks"><span class="script">Panier vide</span><p class="big">Rien à commander pour l'instant</p><a class="btn btn-primary" href="{{ routes.all_products_collection_url }}">Voir le shop</a></div>
+  {%- endif -%}
+</div>
+
+{% schema %}
+{ "name": "Panier", "settings": [] }
+{% endschema %}

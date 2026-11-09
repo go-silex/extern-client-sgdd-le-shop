@@ -1,0 +1,72 @@
+<section class="hero">
+  <div class="hero-inner">
+    <div>
+      {%- if section.settings.kicker != blank -%}<span class="hero-kicker">{{ section.settings.kicker }}</span>{%- endif -%}
+      <h1>{{ section.settings.title }}<br>& <span class="hl">{{ section.settings.highlight }}</span></h1>
+      {%- if section.settings.text != blank -%}<p class="lead">{{ section.settings.text }}</p>{%- endif -%}
+      <div class="hero-ctas">
+        {%- if section.settings.button_1 != blank -%}<a class="btn btn-primary" href="{{ section.settings.link_1 | default: routes.all_products_collection_url }}">{{ section.settings.button_1 }}</a>{%- endif -%}
+        {%- if section.settings.button_2 != blank -%}<a class="btn btn-secondary" href="{{ section.settings.link_2 | default: routes.root_url }}">{{ section.settings.button_2 }}</a>{%- endif -%}
+      </div>
+      {%- if section.blocks.size > 0 -%}
+        <div class="hero-meta">
+          {%- for block in section.blocks -%}
+            <div {{ block.shopify_attributes }}><strong>{{ block.settings.title }}</strong>{{ block.settings.text }}</div>
+          {%- endfor -%}
+        </div>
+      {%- endif -%}
+    </div>
+    <div class="hero-visual">
+      {%- if section.settings.sticker != blank -%}<div class="sticker"><div>{{ section.settings.sticker | newline_to_br }}</div></div>{%- endif -%}
+      <figure class="polaroid p1">
+        {%- if section.settings.image_1 -%}
+          {{ section.settings.image_1 | image_url: width: 1200 | image_tag: loading: 'eager', fetchpriority: 'high', alt: section.settings.caption_1 }}
+        {%- else -%}
+          <img src="{{ 'sgdd-cover.jpg' | asset_url }}" alt="{{ section.settings.caption_1 | escape }}" width="1536" height="1024" fetchpriority="high">
+        {%- endif -%}
+        <figcaption>{{ section.settings.caption_1 }}</figcaption>
+      </figure>
+      <figure class="polaroid p2">
+        {%- if section.settings.image_2 -%}
+          {{ section.settings.image_2 | image_url: width: 600 | image_tag: loading: 'eager', alt: section.settings.caption_2 }}
+        {%- else -%}
+          <img src="{{ 'sgdd-vitrine.jpg' | asset_url }}" alt="{{ section.settings.caption_2 | escape }}" width="360" height="480">
+        {%- endif -%}
+        <figcaption>{{ section.settings.caption_2 }}</figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Bannière d'accueil",
+  "settings": [
+    { "type": "text", "id": "kicker", "label": "Accroche manuscrite", "default": "Concept store" },
+    { "type": "text", "id": "title", "label": "Titre", "default": "Surf, skate" },
+    { "type": "text", "id": "highlight", "label": "Mot en jaune", "default": "chopper" },
+    { "type": "textarea", "id": "text", "label": "Texte", "default": "La boutique de Saint-Georges-de-Didonne, maintenant en ligne. Nos dessins SGDD sur hoodies, tees et casquettes, Jay'M Riding et une sélection vintage US." },
+    { "type": "text", "id": "button_1", "label": "Bouton 1", "default": "Voir la collection SGDD" },
+    { "type": "url", "id": "link_1", "label": "Lien bouton 1" },
+    { "type": "text", "id": "button_2", "label": "Bouton 2", "default": "Passer à la boutique" },
+    { "type": "url", "id": "link_2", "label": "Lien bouton 2" },
+    { "type": "image_picker", "id": "image_1", "label": "Grande image (sinon l'illustration SGDD)" },
+    { "type": "text", "id": "caption_1", "label": "Légende grande image", "default": "Saint-Georges-de-Didonne" },
+    { "type": "image_picker", "id": "image_2", "label": "Petite image (sinon la vitrine)" },
+    { "type": "text", "id": "caption_2", "label": "Légende petite image", "default": "Place de Verdun" },
+    { "type": "textarea", "id": "sticker", "label": "Pastille ronde", "default": "NEW\nDROP" }
+  ],
+  "blocks": [
+    {
+      "type": "point",
+      "name": "Point fort",
+      "settings": [
+        { "type": "text", "id": "title", "label": "Titre", "default": "Retrait gratuit" },
+        { "type": "text", "id": "text", "label": "Texte", "default": "Place de Verdun" }
+      ]
+    }
+  ],
+  "max_blocks": 4,
+  "presets": [{ "name": "Bannière d'accueil" }]
+}
+{% endschema %}
